@@ -1,18 +1,48 @@
 <template>
-    <main>
-        <h2>Leave Management system</h2>
-        <button class="btn btn-primary"> Test Btn</button>
-    </main>
+    <div>
+
+
+        <Header />
+        <div id="layoutSidenav">
+            <Sidebar />
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <keep-alive>
+                        <router-view> </router-view>
+                    </keep-alive>
+
+                </main>
+
+
+
+                <Footer />
+
+
+            </div>
+        </div>
+
+
+        
+    </div>
 </template>
 
 <script>
-    export default {
-        name: 'App',
-        data() {
-            return {
+import Header from './components/Header';
+import Sidebar from './components/Sidebar'; 
+import Footer from './components/Footer';
+export default {
+    name: 'App',
+    components: {
+        Header, 
+        Sidebar, 
+        Footer
+    },
+    data() {
+        return {
 
-            }
         }
     }
+}
 </script>
 
