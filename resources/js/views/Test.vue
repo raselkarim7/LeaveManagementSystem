@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import * as testService from '../services/test_service'
 export default {
 		name: 'TestView', 
 		data() {
@@ -88,11 +89,24 @@ export default {
 				this.$refs.myTestModal.show()
 			},  
 			attachImage(event) {
-				console.log(event.target.files);
+				if (event.target.files.length > 0) {
+					this.test.image = event.target.files[0]
+				}
 
 			}, 
-			createNewTest() {
+			createNewTest: async function() {
+				let formData = new FormData()
+				formData.append('name', this.test.name)
+				formData.append('image', this.test.image)
 				console.log('form submit works')
+
+				try {
+					const response = await testService.createTest(formData)
+					console.log('Test.vue response === ', response)
+				} catch (error) {
+					console.log('Test.vue error : ', error)
+				}
+
 			}
 		}
 }
