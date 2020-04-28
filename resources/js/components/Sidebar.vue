@@ -4,11 +4,11 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">Core</div>
-                    <router-link class="nav-link" to="/"
+                    <router-link class="nav-link" to="/home"
                         ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </router-link>
-                    <router-link class="nav-link" to="/test-view">
+                    <router-link class="nav-link" to="/home/test-view">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Test View 
                     </router-link>
