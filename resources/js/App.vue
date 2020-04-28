@@ -1,5 +1,8 @@
 <template> 
-    <router-view> </router-view>
+    <div>
+        <router-view> </router-view>
+        <FlashMessage :position="'right top'"></FlashMessage>
+    </div>
 </template>
 
 <script>
