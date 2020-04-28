@@ -21,6 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/test', function(Request $request) {
     $data = $request->all();
     $data['fromServer'] = 'yessssssss';
-    return $data; 
+    return $data;
     return 'Test api request successful';
 });

@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbc15a7c-b66e-42c3-a9f3-95531f4d4c96" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/Test.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Test.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,11 +62,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
-              <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+              <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="35" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -90,6 +98,7 @@
         <option value="$PROJECT_DIR$/resources/js/App.vue" />
         <option value="$PROJECT_DIR$/resources/sass/app.scss" />
         <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/.env" />
       </list>
     </option>
   </component>
@@ -294,7 +303,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6251000" />
+    <option name="totallyTimeSpent" value="7570000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -365,7 +374,14 @@
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="35" />
         </state>
       </provider>
     </entry>
