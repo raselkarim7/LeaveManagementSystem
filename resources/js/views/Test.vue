@@ -53,7 +53,7 @@
 								<label for="image">Choose an image</label>
 								<input 
 									type="file" class="form-control" id="image" 
-									v-on:change="attachImage"
+									@change="attachImage"
 								>
 							</div>
 						</form>
@@ -87,7 +87,8 @@ export default {
 			showTestModal() {
 				this.$refs.myTestModal.show()
 			},  
-			attachImage() {
+			attachImage(event) {
+				console.log(event.target.files);
 
 			}, 
 			createNewTest() {

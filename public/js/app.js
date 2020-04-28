@@ -403,7 +403,9 @@ __webpack_require__.r(__webpack_exports__);
     showTestModal: function showTestModal() {
       this.$refs.myTestModal.show();
     },
-    attachImage: function attachImage() {},
+    attachImage: function attachImage(event) {
+      console.log(event.target.files);
+    },
     createNewTest: function createNewTest() {
       console.log('form submit works');
     }
