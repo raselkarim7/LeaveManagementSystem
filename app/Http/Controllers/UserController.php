@@ -12,10 +12,11 @@ class UserController extends Controller
 {
 
     public function getEmployees() {
-        return User::whereHas(
-            'roles', function($q){
-            $q->where('name', '<>', 'admin');
-        })->with('roles')->with('managers')->get();
+        return User::has('roles', '==', 0)
+            ->orWhereHas(
+                'roles', function($q){
+                $q->where('name', '<>', 'admin');
+            })->with('roles')->with('managers')->get();
     }
 
     public function getHRmanagers() {

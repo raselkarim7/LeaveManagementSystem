@@ -2390,24 +2390,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "ApplyLeave",
   data: function data() {
     return {
+      user: {},
       test: {
         name: "",
         image: ""
       }
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['loggedInUser'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])([])),
   mounted: function mounted() {
-    console.log('AL ====== mounted: ', this.loggedInUser);
+    console.log('ApplyLeave ====== mounted: ');
   },
   created: function created() {
-    console.log('AL ====== created: ', this.loggedInUser);
-    _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["getUser"]().then(function (res) {
-      console.log("Test.vue =========== ", res);
-    })["catch"](function (err) {
-      console.log("Test.vue errrrrrr ", err);
-    });
+    console.log('ApplyLeave ====== created: ');
+    this.fetchLoggedInUser();
   },
+  fetchLoggedInUser: function () {
+    var _fetchLoggedInUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              try {
+                response = _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["getUser"]();
+                this.user = response.data;
+              } catch (error) {}
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function fetchLoggedInUser() {
+      return _fetchLoggedInUser.apply(this, arguments);
+    }
+
+    return fetchLoggedInUser;
+  }(),
   methods: {
     hideTestModal: function hideTestModal() {
       this.$refs.myTestModal.hide();
@@ -2416,11 +2439,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$refs.myTestModal.show();
     },
     createNewRecord: function () {
-      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var formData;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 formData = new FormData();
                 formData.append("name", this.test.name);
@@ -2434,10 +2457,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 4:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function createNewRecord() {
@@ -81984,9 +82007,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
         return state.roles.includes(permission_name);
       };
-    },
-    loggedInUser: function loggedInUser(state) {
-      return state.user;
     }
   }
 }));

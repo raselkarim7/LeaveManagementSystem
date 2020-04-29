@@ -62,7 +62,6 @@ export default new Vuex.Store({
             return state.roles.includes(permission_name)
           },
 
-        loggedInUser: state => state.user  
   
      }
 

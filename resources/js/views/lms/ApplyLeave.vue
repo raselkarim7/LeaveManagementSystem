@@ -68,6 +68,7 @@ export default {
   name: "ApplyLeave",
   data() {
     return {
+      user: {},   
       test: {
         name: "",
         image: ""
@@ -76,23 +77,25 @@ export default {
   },
   computed: {
       ...mapGetters([
-          'loggedInUser',
+          
       ])
   },
   mounted() {
-      console.log('AL ====== mounted: ', this.loggedInUser)
+      console.log('ApplyLeave ====== mounted: ',)
   }, 
   created() {
-      console.log('AL ====== created: ', this.loggedInUser)
-    authService
-      .getUser()
-      .then(res => {
-        console.log("Test.vue =========== ", res);
-      })
-      .catch(err => {
-        console.log("Test.vue errrrrrr ", err);
-      });
+      console.log('ApplyLeave ====== created: ', )
+      this.fetchLoggedInUser();
   },
+
+  fetchLoggedInUser: async function() {
+      try {
+        const response = authService.getUser()
+        this.user = response.data;          
+      } catch (error) {
+          
+      }
+  }, 
   methods: {
     hideTestModal() {
       this.$refs.myTestModal.hide();
