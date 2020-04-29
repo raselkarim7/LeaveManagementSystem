@@ -24,6 +24,10 @@
                             Employees
                         </router-link>
 
+                        <router-link class="nav-link" to="/home/apply-leave" v-if="hasPermission([])">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Apply Leave
+                        </router-link>
                         
 
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"

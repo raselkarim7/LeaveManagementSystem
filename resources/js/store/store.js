@@ -11,7 +11,7 @@ export default new Vuex.Store({
         serverPath: 'http://localhost:8000',
 
         token: storage.token.getToken(), 
-        user: {}, 
+        user: storage.user.getUser(), 
         roles: storage.roles.getRoles() || []
 
     },
@@ -61,6 +61,8 @@ export default new Vuex.Store({
             }
             return state.roles.includes(permission_name)
           },
+
+        loggedInUser: state => state.user  
   
      }
 

@@ -97,21 +97,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                try {
-                  response = _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["logout"]();
-                  _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].token.removeToken();
-                  _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].user.removeUser();
-                  _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].roles.removeRoles();
-                  this.$router.go();
-                } catch (error) {} // console.log('handle logout ------------> '); 
+                _context.prev = 0;
+                _context.next = 3;
+                return _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["logout"]();
 
+              case 3:
+                response = _context.sent;
+                _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].token.removeToken();
+                _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].user.removeUser();
+                _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].roles.removeRoles();
+                this.$router.go();
+                _context.next = 12;
+                break;
 
-              case 1:
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
+
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee, this, [[0, 10]]);
       }));
 
       function handleLogout() {
@@ -141,6 +149,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -532,6 +544,24 @@ var render = function() {
                       ]),
                       _vm._v(
                         "\n                        Employees\n                    "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.hasPermission([])
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: "/home/apply-leave" }
+                    },
+                    [
+                      _c("div", { staticClass: "sb-nav-link-icon" }, [
+                        _c("i", { staticClass: "fas fa-tachometer-alt" })
+                      ]),
+                      _vm._v(
+                        "\n                        Apply Leave\n                    "
                       )
                     ]
                   )

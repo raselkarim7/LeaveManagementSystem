@@ -7,6 +7,7 @@ import Dashboard from './views/Dashboard.vue'
 import Test from './views/Test.vue'; 
 
 import Employees from './views/lms/Employees.vue'
+import ApplyLeave from './views/lms/ApplyLeave.vue'
 
 import * as auth from './services/auth_service'; 
 
@@ -51,6 +52,16 @@ const routes = [
                 },
           
             }, 
+            {
+                path: 'apply-leave',
+                name: 'ApplyLeave', 
+                component: ApplyLeave, 
+                meta: {
+                    permission_name: []
+                },
+          
+            }, 
+            
             
         ], 
         beforeEnter(to, from, next) {

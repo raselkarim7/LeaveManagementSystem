@@ -46,7 +46,7 @@ export default {
         handleLogout: async function () {
             
             try {
-                const response = authService.logout(); 
+                const response = await authService.logout(); 
                 storage.token.removeToken(); 
                 storage.user.removeUser(); 
                 storage.roles.removeRoles(); 
