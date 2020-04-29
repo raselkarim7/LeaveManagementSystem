@@ -52,4 +52,8 @@ Route::group([
     Route::put('employee', 'UserController@editEmployee');
 
 
+    Route::get('leave-types', 'LeaveController@leaveTypes');
+    Route::post('add-leave', 'LeaveController@store');
+
+
 });

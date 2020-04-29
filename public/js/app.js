@@ -2307,8 +2307,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/auth_service */ "./resources/js/services/auth_service.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_leave_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/leave_service */ "./resources/js/services/leave_service.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth_service */ "./resources/js/services/auth_service.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2383,7 +2384,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//import * as testService from '../services/test_service'
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2391,47 +2433,96 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       user: {},
-      test: {
-        name: "",
-        image: ""
-      }
+      leave_types: [],
+      leave: {
+        leave_types_id: "",
+        no_of_days: "",
+        start_date: "",
+        end_date: ""
+      },
+      errors: {}
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])([])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])([])),
   mounted: function mounted() {
-    console.log('ApplyLeave ====== mounted: ');
+    console.log("ApplyLeave ====== mounted: ");
   },
   created: function created() {
-    console.log('ApplyLeave ====== created: ');
+    console.log("ApplyLeave ====== created: ");
     this.fetchLoggedInUser();
+    this.fetchLeaveTypes();
   },
-  fetchLoggedInUser: function () {
-    var _fetchLoggedInUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              try {
-                response = _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["getUser"]();
-                this.user = response.data;
-              } catch (error) {}
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function fetchLoggedInUser() {
-      return _fetchLoggedInUser.apply(this, arguments);
-    }
-
-    return fetchLoggedInUser;
-  }(),
   methods: {
+    fetchLeaveTypes: function () {
+      var _fetchLeaveTypes = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["leaveTypes"]();
+
+              case 3:
+                response = _context.sent;
+                this.leave_types = response.data;
+                _context.next = 9;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 7]]);
+      }));
+
+      function fetchLeaveTypes() {
+        return _fetchLeaveTypes.apply(this, arguments);
+      }
+
+      return fetchLeaveTypes;
+    }(),
+    fetchLoggedInUser: function () {
+      var _fetchLoggedInUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["getUser"]();
+
+              case 3:
+                response = _context2.sent;
+                this.user = response.data;
+                _context2.next = 9;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 7]]);
+      }));
+
+      function fetchLoggedInUser() {
+        return _fetchLoggedInUser.apply(this, arguments);
+      }
+
+      return fetchLoggedInUser;
+    }(),
     hideTestModal: function hideTestModal() {
       this.$refs.myTestModal.hide();
     },
@@ -2439,28 +2530,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$refs.myTestModal.show();
     },
     createNewRecord: function () {
-      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var formData;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                formData = new FormData();
-                formData.append("name", this.test.name);
-                formData.append("image", this.test.image);
-                console.log("form submit works"); // try {
-                // 	const response = await testService.createTest(formData)
-                // 	console.log('Test.vue response === ', response)
-                // } catch (error) {
-                // 	console.log('Test.vue error : ', error)
-                // }
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["addLeave"](this.leave);
 
-              case 4:
+              case 3:
+                response = _context3.sent;
+                _context3.next = 8;
+                break;
+
+              case 6:
+                _context3.prev = 6;
+                _context3.t0 = _context3["catch"](0);
+
+              case 8:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this, [[0, 6]]);
       }));
 
       function createNewRecord() {
@@ -64741,12 +64835,56 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "fa fa-plus" }),
-              _vm._v(" Create Employee\n      ")
+              _vm._v(" Apply\n      ")
             ]
           )
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _c("div", { staticClass: "card-body" }, [
+          _c("table", { staticClass: "table" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("tbody", [
+              _c("tr", [
+                _c("td", [_vm._v(_vm._s(_vm.user.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.user.email))]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  _vm._l(_vm.user.roles, function(role, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "badge badge-primary m-1" },
+                      [_vm._v(_vm._s(role.label))]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  _vm._l(_vm.user.managers, function(manager, index) {
+                    return _c(
+                      "span",
+                      { key: index, staticClass: "badge badge-secondary m-1" },
+                      [_vm._v(_vm._s(manager.name))]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.user.total_paid_leave))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.user.paid_leave_taken))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.user.total_sick_leave))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.user.sick_leave_taken))])
+              ])
+            ])
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -64759,33 +64897,154 @@ var render = function() {
           _c("div", { staticClass: "d-block" }, [
             _c("form", [
               _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                _c("label", { attrs: { for: "role" } }, [
+                  _vm._v("Select Leave Types")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.leave.leave_types_id,
+                        expression: "leave.leave_types_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "role" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.leave,
+                          "leave_types_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { disabled: "", value: "" } }, [
+                      _vm._v("Please Select one")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.leave_types, function(lt) {
+                      return _c(
+                        "option",
+                        { key: lt.id, domProps: { value: lt.id } },
+                        [_vm._v(_vm._s(lt.name))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm.errors.leave_types_id
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.leave_types_id[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("No of days")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.test.name,
-                      expression: "test.name"
+                      value: _vm.leave.no_of_days,
+                      expression: "leave.no_of_days"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: {
-                    type: "text",
+                    type: "number",
                     id: "name",
                     placeholder: "Enter name here"
                   },
-                  domProps: { value: _vm.test.name },
+                  domProps: { value: _vm.leave.no_of_days },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.test, "name", $event.target.value)
+                      _vm.$set(_vm.leave, "no_of_days", $event.target.value)
                     }
                   }
                 })
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("label", { attrs: { for: "startDate" } }, [
+                  _vm._v("Choose Start Date")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.leave.start_date,
+                      expression: "leave.start_date"
+                    }
+                  ],
+                  attrs: { type: "date", id: "startDate", name: "startDate" },
+                  domProps: { value: _vm.leave.start_date },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.leave, "start_date", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Value: '" + _vm._s(_vm.leave.start_date) + "'")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("label", { attrs: { for: "endDate" } }, [
+                  _vm._v("Choose End Date")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.leave.end_date,
+                      expression: "leave.end_date"
+                    }
+                  ],
+                  attrs: { type: "date", id: "endDate", name: "endDate" },
+                  domProps: { value: _vm.leave.end_date },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.leave, "end_date", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("p", [_vm._v("Value: '" + _vm._s(_vm.leave.end_date) + "'")])
               ])
             ])
           ]),
@@ -64822,38 +65081,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", [
       _c("i", { staticClass: "fas fa-table mr-1" }),
-      _vm._v("All Employees\n      ")
+      _vm._v("Leaves & Info\n      ")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("table", { staticClass: "table" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("First")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Last")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Handle")])
-          ])
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Mark")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Otto")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("@mdo")])
-          ])
-        ])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Roles")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Assigned HR Managers")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total Paid Leave")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Paid Leave Taken")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total Sick Leave")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Sick Leave Taken")])
       ])
     ])
   }
@@ -81925,6 +82176,35 @@ service.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 /* harmony default export */ __webpack_exports__["default"] = (service);
+
+/***/ }),
+
+/***/ "./resources/js/services/leave_service.js":
+/*!************************************************!*\
+  !*** ./resources/js/services/leave_service.js ***!
+  \************************************************/
+/*! exports provided: leaveTypes, addLeave */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "leaveTypes", function() { return leaveTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addLeave", function() { return addLeave; });
+/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
+
+function leaveTypes() {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'get',
+    url: 'leave-types'
+  });
+}
+function addLeave(data) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'post',
+    url: 'add-leave',
+    data: data
+  });
+}
 
 /***/ }),
 

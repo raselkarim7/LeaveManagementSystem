@@ -68,6 +68,6 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return response()->json(User::with('roles')->find( Auth::id() ));
+        return response()->json(User::with('roles')->with('managers')->find( Auth::id() ));
     }
 }
