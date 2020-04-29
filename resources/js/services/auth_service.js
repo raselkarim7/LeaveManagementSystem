@@ -37,3 +37,12 @@ export function getUser() {
     
     
 }
+
+
+export function isLoggedIn() {
+    return storage.token.getToken() !== null; 
+}
+
+export function logout() {
+    return http().get('/auth/logout')
+}

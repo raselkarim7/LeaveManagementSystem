@@ -17,7 +17,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <button class="dropdown-item" @click="handleLogout">Logout</button>
                     </div>
                 </li>
             </ul>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import * as authService from '../services/auth_service'
+import storage from '../utils/storage'
 export default {
     name: 'Header', 
     data() {
@@ -39,6 +41,21 @@ export default {
             } else {
                 document.body.classList.add('sb-sidenav-toggled');
             }
+        }, 
+
+        handleLogout: async function () {
+            
+            try {
+                const response = authService.logout(); 
+                storage.token.removeToken(); 
+                storage.user.removeUser(); 
+                storage.roles.removeRoles(); 
+
+                this.$router.go(); 
+            } catch (error) {
+                
+            }
+            // console.log('handle logout ------------> '); 
         }
     }
 }
