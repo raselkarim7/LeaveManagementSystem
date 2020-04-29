@@ -1,6 +1,6 @@
-import { http, httpFile } from './http_service';
+// import { http, httpFile } from './http_service';
 
-export function createTest(data) {
-    return httpFile().post('/test', data)
-}
+// export function createTest(data) {
+//     return httpFile().post('/test', data)
+// }
 

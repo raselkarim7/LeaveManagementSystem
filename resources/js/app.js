@@ -12,7 +12,7 @@ import router from './router.js'
 import store from './store/store.js'
 import App from './App.vue'
 
-new Vue({
+export default new Vue({
     el: '#app',
     store,
     router, 

@@ -1,12 +1,16 @@
-import { http, httpFile } from './http_service';
+import  http   from './http_service';
+
 import axios from 'axios';
 import storage from '../utils/storage'
 
 export function login(data) {
     return new Promise((resolve, reject) => {
-        http().post('auth/login', data)
-        .then(response => {
-            console.log('response..... ', response)
+        http({
+            method: 'post', 
+            url: 'auth/login', 
+            data: data
+        }).then(response => {
+            // console.log('response..... ', response)
             const { token_type, access_token } = response.data
             const AUTH_TOKEN = `${token_type} ${access_token}`; 
 
@@ -22,7 +26,10 @@ export function login(data) {
 
 export function getUser() {
     return new Promise((resolve, reject) => {
-        http().get('auth/user').then(res => {
+        http({
+            method: 'get', 
+            url: 'auth/user'
+        }).then(res => {
             const {id, name, email} = res.data; 
             const user = {id, name, email}
             const roles = res.data.roles 
@@ -33,6 +40,8 @@ export function getUser() {
         }).catch(error => {
             reject(error)
         })
+
+
     })
     
     
@@ -44,5 +53,8 @@ export function isLoggedIn() {
 }
 
 export function logout() {
-    return http().get('/auth/logout')
+    return http({
+        method: 'get', 
+        url: '/auth/logout'
+    })
 }

@@ -2156,7 +2156,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_test_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/test_service */ "./resources/js/services/test_service.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/auth_service */ "./resources/js/services/auth_service.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2234,6 +2234,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//import * as testService from '../services/test_service'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TestView',
@@ -2244,6 +2245,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         image: ''
       }
     };
+  },
+  created: function created() {
+    _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["getUser"]().then(function (res) {
+      console.log('Test.vue =========== ', res);
+    })["catch"](function (err) {
+      console.log('Test.vue errrrrrr ', err);
+    });
   },
   methods: {
     hideTestModal: function hideTestModal() {
@@ -2259,7 +2267,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     createNewTest: function () {
       var _createNewTest = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var formData, response;
+        var formData;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2267,28 +2275,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData = new FormData();
                 formData.append('name', this.test.name);
                 formData.append('image', this.test.image);
-                console.log('form submit works');
-                _context.prev = 4;
-                _context.next = 7;
-                return _services_test_service__WEBPACK_IMPORTED_MODULE_1__["createTest"](formData);
+                console.log('form submit works'); // try {
+                // 	const response = await testService.createTest(formData)
+                // 	console.log('Test.vue response === ', response)
+                // } catch (error) {
+                // 	console.log('Test.vue error : ', error)
+                // }
 
-              case 7:
-                response = _context.sent;
-                console.log('Test.vue response === ', response);
-                _context.next = 14;
-                break;
-
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](4);
-                console.log('Test.vue error : ', _context.t0);
-
-              case 14:
+              case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 11]]);
+        }, _callee, this);
       }));
 
       function createNewTest() {
@@ -80357,7 +80356,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80384,14 +80383,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_smartweb_vue_flash_message__WEBP
 
 
 
-new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
+/* harmony default export */ __webpack_exports__["default"] = (new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   store: _store_store_js__WEBPACK_IMPORTED_MODULE_6__["default"],
   router: _router_js__WEBPACK_IMPORTED_MODULE_5__["default"],
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
   }
-});
+}));
 
 /***/ }),
 
@@ -80494,8 +80493,12 @@ __webpack_require__.r(__webpack_exports__);
 
 function login(data) {
   return new Promise(function (resolve, reject) {
-    Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().post('auth/login', data).then(function (response) {
-      console.log('response..... ', response);
+    Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      method: 'post',
+      url: 'auth/login',
+      data: data
+    }).then(function (response) {
+      // console.log('response..... ', response)
       var _response$data = response.data,
           token_type = _response$data.token_type,
           access_token = _response$data.access_token;
@@ -80510,7 +80513,10 @@ function login(data) {
 }
 function getUser() {
   return new Promise(function (resolve, reject) {
-    Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('auth/user').then(function (res) {
+    Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      method: 'get',
+      url: 'auth/user'
+    }).then(function (res) {
       var _res$data = res.data,
           id = _res$data.id,
           name = _res$data.name,
@@ -80533,7 +80539,10 @@ function isLoggedIn() {
   return _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].token.getToken() !== null;
 }
 function logout() {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["http"])().get('/auth/logout');
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'get',
+    url: '/auth/logout'
+  });
 }
 
 /***/ }),
@@ -80542,57 +80551,65 @@ function logout() {
 /*!***********************************************!*\
   !*** ./resources/js/services/http_service.js ***!
   \***********************************************/
-/*! exports provided: http, httpFile */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "http", function() { return http; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "httpFile", function() { return httpFile; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store.js */ "./resources/js/store/store.js");
 /* harmony import */ var _utils_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/storage */ "./resources/js/utils/storage.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../router */ "./resources/js/router.js");
+/* harmony import */ var _app_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app.js */ "./resources/js/app.js");
 
 
 
-function http() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-    baseURL: _store_store_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.apiURL,
-    headers: {
-      Authorization: _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].token.getToken(),
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+
+
+var service = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
+  baseURL: _store_store_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.apiURL
+});
+service.interceptors.request.use(function (config) {
+  config.headers['Authorization'] = _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].token.getToken();
+  config.headers['Accept'] = 'application/json';
+  config.headers['Content-Type'] = 'application/json';
+  return config;
+}, function (error) {
+  // Do something with request error
+  console.log(error); // for debug
+
+  return Promise.reject(error);
+});
+service.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  console.log('http_service.js, err----->', error.response); // for debug
+
+  if (error.response.status !== 422) {
+    if (error.response.status === 401 && _router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.path === '/login') {
+      _app_js__WEBPACK_IMPORTED_MODULE_4__["default"].flashMessage.error({
+        message: 'Invalid Email Or Password',
+        time: 3000
+      });
+    } else {
+      _app_js__WEBPACK_IMPORTED_MODULE_4__["default"].flashMessage.error({
+        message: error.response.data.message,
+        time: 3000
+      });
     }
-  });
-}
-function httpFile() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-    baseURL: _store_store_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.apiURL,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'multipart/form-data'
-    }
-  });
-}
+  }
 
-/***/ }),
+  if (error.response.status === 401 && _router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.path !== '/login') {
+    _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].token.removeToken();
+    _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].user.removeUser();
+    _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].roles.removeRoles();
+    _router__WEBPACK_IMPORTED_MODULE_3__["default"].push('/login');
+  }
 
-/***/ "./resources/js/services/test_service.js":
-/*!***********************************************!*\
-  !*** ./resources/js/services/test_service.js ***!
-  \***********************************************/
-/*! exports provided: createTest */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTest", function() { return createTest; });
-/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
-
-function createTest(data) {
-  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["httpFile"])().post('/test', data);
-}
+  return Promise.reject(error);
+});
+/* harmony default export */ __webpack_exports__["default"] = (service);
 
 /***/ }),
 

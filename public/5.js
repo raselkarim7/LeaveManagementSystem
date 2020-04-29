@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/authentication/Login.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
@@ -117,55 +117,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 console.log("inside login....");
                 this.submitingToServer = true;
-                this.errors = {};
-                _context.prev = 3;
-                _context.next = 6;
+                _context.prev = 2;
+                _context.next = 5;
                 return _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["login"](this.user);
 
-              case 6:
+              case 5:
                 response = _context.sent;
                 this.submitingToServer = false;
                 this.errors = {};
                 this.$store.dispatch("setToken", response);
-                _context.next = 12;
+                _context.next = 11;
                 return this.fethUserNow();
 
-              case 12:
-                this.$router.push('/home'); // console.log("Login.vue Response =========>>> ", response);
-
-                _context.next = 26;
+              case 11:
+                this.$router.push('/home');
+                console.log("Login.vue Response =========>>> ", response);
+                _context.next = 31;
                 break;
 
               case 15:
                 _context.prev = 15;
-                _context.t0 = _context["catch"](3);
-                this.submitingToServer = false; // console.log("Login.vue Error ========= ", error, error.response);
-
+                _context.t0 = _context["catch"](2);
+                this.submitingToServer = false;
+                console.log("Login.vue Error ========= ", _context.t0, _context.t0.response);
                 _context.t1 = _context.t0.response.status;
-                _context.next = _context.t1 === 422 ? 21 : _context.t1 === 500 ? 23 : 25;
+                _context.next = _context.t1 === 422 ? 22 : _context.t1 === 401 ? 25 : _context.t1 === 500 ? 27 : 29;
                 break;
 
-              case 21:
-                this.errors = _context.t0.response.data.errors; // console.log("errors =========== ", this.errors);
+              case 22:
+                this.errors = _context.t0.response.data.errors;
+                console.log("errors =========== ", this.errors);
+                return _context.abrupt("break", 31);
 
-                return _context.abrupt("break", 26);
+              case 25:
+                this.flashMessage.error({
+                  message: _context.t0.response.data.message,
+                  time: 3000
+                });
+                return _context.abrupt("break", 31);
 
-              case 23:
+              case 27:
                 this.flashMessage.error({
                   message: _context.t0.response.data.message,
                   time: 2000
                 });
-                return _context.abrupt("break", 26);
+                return _context.abrupt("break", 31);
 
-              case 25:
-                return _context.abrupt("break", 26);
+              case 29:
+                this.flashMessage.error({
+                  message: "Some error occured, Please Try again",
+                  time: 3000
+                });
+                return _context.abrupt("break", 31);
 
-              case 26:
+              case 31:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[3, 15]]);
+        }, _callee, this, [[2, 15]]);
       }));
 
       function handleLogin() {
@@ -187,21 +197,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context2.sent;
-                // console.log("user --------> ", response.data);
+                console.log("user --------> ", response.data);
                 this.$store.dispatch("setUser", response.data);
-                _context2.next = 9;
+                _context2.next = 11;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
+                console.log("wwwwwwww ----------> ", _context2.t0, _context2.t0.response);
 
-              case 9:
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 7]]);
+        }, _callee2, this, [[0, 8]]);
       }));
 
       function fethUserNow() {

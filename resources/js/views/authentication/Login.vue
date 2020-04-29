@@ -93,6 +93,7 @@ export default {
     handleLogin: async function() {
       console.log("inside login....");
       this.submitingToServer = true;
+      this.errors = {}
       try {
         const response = await authService.login(this.user);
         this.submitingToServer = false;
@@ -100,24 +101,17 @@ export default {
         this.$store.dispatch("setToken", response);
 
         await this.fethUserNow();
-        
         this.$router.push('/home');
 
-        console.log("Login.vue Response =========>>> ", response);
+        // console.log("Login.vue Response =========>>> ", response);
       } catch (error) {
+
         this.submitingToServer = false;
-        console.log("Login.vue Error ========= ", error, error.response);
+        // console.log("Login.vue Error ========= ", error, error.response);
         switch (error.response.status) {
           case 422:
             this.errors = error.response.data.errors;
-            console.log("errors =========== ", this.errors);
-            break;
-
-          case 401:
-            this.flashMessage.error({
-              message: error.response.data.message,
-              time: 3000
-            });
+            // console.log("errors =========== ", this.errors);
             break;
 
           case 500:
@@ -128,10 +122,6 @@ export default {
             break;
 
           default:
-            this.flashMessage.error({
-              message: "Some error occured, Please Try again",
-              time: 3000
-            });
             break;
         }
       }
@@ -140,10 +130,10 @@ export default {
     fethUserNow: async function() {
       try {
         const response = await authService.getUser();
-        console.log("user --------> ", response.data);
+        // console.log("user --------> ", response.data);
         this.$store.dispatch("setUser", response.data);
       } catch (error) {
-        console.log("wwwwwwww ----------> ", error, error.response);
+        // console.log("wwwwwwww ----------> ", error, error.response);
       }
     }
   }

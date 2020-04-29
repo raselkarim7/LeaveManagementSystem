@@ -70,7 +70,9 @@
 </template>
 
 <script>
-import * as testService from '../services/test_service'
+//import * as testService from '../services/test_service'
+import * as authService from '../services/auth_service'
+
 export default {
 		name: 'TestView', 
 		data() {
@@ -80,6 +82,13 @@ export default {
 					image: ''
 				}
 			}
+		}, 
+		created() {
+			authService.getUser().then(res => {
+				console.log('Test.vue =========== ', res)
+			}).catch(err => {
+				console.log('Test.vue errrrrrr ', err)
+			})
 		}, 
 		methods: {
 			hideTestModal() {
@@ -100,12 +109,12 @@ export default {
 				formData.append('image', this.test.image)
 				console.log('form submit works')
 
-				try {
-					const response = await testService.createTest(formData)
-					console.log('Test.vue response === ', response)
-				} catch (error) {
-					console.log('Test.vue error : ', error)
-				}
+				// try {
+				// 	const response = await testService.createTest(formData)
+				// 	console.log('Test.vue response === ', response)
+				// } catch (error) {
+				// 	console.log('Test.vue error : ', error)
+				// }
 
 			}
 		}
