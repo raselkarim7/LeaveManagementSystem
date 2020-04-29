@@ -5,6 +5,9 @@ Vue.use(Router)
 import store from './store/store.js'
 import Dashboard from './views/Dashboard.vue'
 import Test from './views/Test.vue'; 
+
+import Employees from './views/lms/Employees.vue'
+
 import * as auth from './services/auth_service'; 
 
 function checkRoutePermission(to) {
@@ -39,6 +42,16 @@ const routes = [
                 },
           
             }, 
+            {
+                path: 'employees',
+                name: 'Employees', 
+                component: Employees, 
+                meta: {
+                    permission_name: ['admin', 'hr']
+                },
+          
+            }, 
+            
         ], 
         beforeEnter(to, from, next) {
             if (!auth.isLoggedIn()) {

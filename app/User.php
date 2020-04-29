@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'total_paid_leave', 'total_sick_leave'
     ];
 
     /**
@@ -43,6 +43,7 @@ class User extends Authenticatable
     }
 
     public function managers() {
-        return $this->belongsToMany(User::class, 'user_manager', 'user_id', 'manager_id');
+        return $this->belongsToMany(User::class, 'user_manager', 'user_id', 'manager_id')
+            ->select(['id','name','email']);
     }
 }

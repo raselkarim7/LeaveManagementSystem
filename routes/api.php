@@ -38,7 +38,18 @@ Route::group([
 
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
-
-
     });
+});
+
+
+Route::group([
+    'middleware' => 'auth:api'
+], function() {
+    Route::get('roles', 'RoleController@index');
+    Route::get('employees', 'UserController@getEmployees');
+    Route::get('hrmanagers', 'UserController@getHRmanagers');
+    Route::post('employee', 'UserController@addEmployee');
+    Route::put('employee', 'UserController@editEmployee');
+
+
 });

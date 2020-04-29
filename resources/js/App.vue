@@ -1,7 +1,7 @@
 <template> 
     <div>
         <router-view> </router-view>
-        <FlashMessage :position="'right top'"></FlashMessage>
+        <FlashMessage  :position="'right bottom'"></FlashMessage>
     </div>
 </template>
 
@@ -19,3 +19,6 @@ export default {
 }
 </script>
 
+<style >
+
+</style>

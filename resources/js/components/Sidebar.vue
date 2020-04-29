@@ -19,7 +19,7 @@
 
 
                     <div class="sb-sidenav-menu-heading">Interface</div>
-                        <router-link class="nav-link" to="/home/test-view" v-if="hasPermission('admin')">
+                        <router-link class="nav-link" to="/home/employees" v-if="hasPermission(['admin', 'hr'])">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Employees
                         </router-link>

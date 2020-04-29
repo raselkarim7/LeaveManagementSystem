@@ -519,12 +519,12 @@ var render = function() {
                 _vm._v("Interface")
               ]),
               _vm._v(" "),
-              _vm.hasPermission("admin")
+              _vm.hasPermission(["admin", "hr"])
                 ? _c(
                     "router-link",
                     {
                       staticClass: "nav-link",
-                      attrs: { to: "/home/test-view" }
+                      attrs: { to: "/home/employees" }
                     },
                     [
                       _c("div", { staticClass: "sb-nav-link-icon" }, [

@@ -2229,28 +2229,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 //import * as testService from '../services/test_service'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'TestView',
+  name: "TestView",
   data: function data() {
     return {
       test: {
-        name: '',
-        image: ''
+        name: "",
+        image: ""
       }
     };
   },
   created: function created() {
     _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["getUser"]().then(function (res) {
-      console.log('Test.vue =========== ', res);
+      console.log("Test.vue =========== ", res);
     })["catch"](function (err) {
-      console.log('Test.vue errrrrrr ', err);
+      console.log("Test.vue errrrrrr ", err);
     });
   },
   methods: {
@@ -2273,9 +2268,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 formData = new FormData();
-                formData.append('name', this.test.name);
-                formData.append('image', this.test.image);
-                console.log('form submit works'); // try {
+                formData.append("name", this.test.name);
+                formData.append("image", this.test.image);
+                console.log("form submit works"); // try {
                 // 	const response = await testService.createTest(formData)
                 // 	console.log('Test.vue response === ', response)
                 // } catch (error) {
@@ -2295,6 +2290,415 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return createNewTest;
+    }()
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/Employees.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/lms/Employees.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_employee_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/employee_service */ "./resources/js/services/employee_service.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth_service */ "./resources/js/services/auth_service.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Employees",
+  data: function data() {
+    return {
+      operationMode: 'create',
+      roles: [],
+      hr_managers: [],
+      allEmployees: [],
+      submitingToServer: false,
+      user: {
+        name: "",
+        email: "",
+        role_ids: [],
+        manager_ids: [],
+        total_paid_leave: '',
+        total_sick_leave: ''
+      },
+      errors: {}
+    };
+  },
+  created: function created() {
+    this.fetchRoles();
+    this.fetchHRmanagers();
+    this.fetchAllEmployees();
+  },
+  methods: {
+    editEmployee: function editEmployee(employee) {
+      console.log('edit employee ---------> ', employee);
+      var role_ids = employee.roles.map(function (o) {
+        return o.id;
+      });
+      var manager_ids = employee.managers.map(function (o) {
+        return o.id;
+      });
+      var id = employee.id,
+          name = employee.name,
+          email = employee.email,
+          total_paid_leave = employee.total_paid_leave,
+          total_sick_leave = employee.total_sick_leave;
+      var obj = {
+        id: id,
+        name: name,
+        email: email,
+        total_paid_leave: total_paid_leave,
+        total_sick_leave: total_sick_leave,
+        role_ids: role_ids,
+        manager_ids: manager_ids
+      };
+      this.user = obj;
+      this.showFormModal();
+      this.operationMode = 'edit';
+    },
+    fetchAllEmployees: function () {
+      var _fetchAllEmployees = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getEmployees"]();
+
+              case 3:
+                response = _context.sent;
+                this.allEmployees = response.data;
+                _context.next = 9;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 7]]);
+      }));
+
+      function fetchAllEmployees() {
+        return _fetchAllEmployees.apply(this, arguments);
+      }
+
+      return fetchAllEmployees;
+    }(),
+    fetchRoles: function () {
+      var _fetchRoles = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getRoles"]();
+
+              case 3:
+                response = _context2.sent;
+                this.roles = response.data;
+                _context2.next = 9;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 7]]);
+      }));
+
+      function fetchRoles() {
+        return _fetchRoles.apply(this, arguments);
+      }
+
+      return fetchRoles;
+    }(),
+    fetchHRmanagers: function () {
+      var _fetchHRmanagers = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getHRmanagers"]();
+
+              case 3:
+                response = _context3.sent;
+                // console.log('fetchHRmanagers: ', response)
+                this.hr_managers = response.data;
+                _context3.next = 9;
+                break;
+
+              case 7:
+                _context3.prev = 7;
+                _context3.t0 = _context3["catch"](0);
+
+              case 9:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 7]]);
+      }));
+
+      function fetchHRmanagers() {
+        return _fetchHRmanagers.apply(this, arguments);
+      }
+
+      return fetchHRmanagers;
+    }(),
+    hideFormModal: function hideFormModal() {
+      this.$refs.myFormModal.hide();
+    },
+    createEmployee: function createEmployee() {
+      this.user = {
+        name: "",
+        email: "",
+        role_ids: [],
+        manager_ids: [],
+        total_paid_leave: '',
+        total_sick_leave: ''
+      }, this.showFormModal();
+    },
+    showFormModal: function showFormModal() {
+      this.$refs.myFormModal.show();
+    },
+    createNewRecord: function () {
+      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+
+                if (!(this.operationMode === 'edit')) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                _context4.next = 4;
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["editEmployee"](this.user);
+
+              case 4:
+                _context4.next = 8;
+                break;
+
+              case 6:
+                _context4.next = 8;
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["addEmployee"](this.user);
+
+              case 8:
+                this.submitingToServer = false;
+                this.errors = {};
+                this.fetchAllEmployees();
+                this.flashMessage.success({
+                  message: "An employee ".concat(this.operationMode === 'edit' ? 'Edited' : 'Created', "  successfully"),
+                  time: 2000
+                });
+                this.hideFormModal();
+                _context4.next = 26;
+                break;
+
+              case 15:
+                _context4.prev = 15;
+                _context4.t0 = _context4["catch"](0);
+                this.submitingToServer = false; // console.log("Login.vue Error ========= ", error, error.response);
+
+                _context4.t1 = _context4.t0.response.status;
+                _context4.next = _context4.t1 === 422 ? 21 : _context4.t1 === 500 ? 23 : 25;
+                break;
+
+              case 21:
+                this.errors = _context4.t0.response.data.errors; //console.log("errors =========== ", this.errors);
+
+                return _context4.abrupt("break", 26);
+
+              case 23:
+                this.flashMessage.error({
+                  message: _context4.t0.response.data.message,
+                  time: 2000
+                });
+                return _context4.abrupt("break", 26);
+
+              case 25:
+                return _context4.abrupt("break", 26);
+
+              case 26:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 15]]);
+      }));
+
+      function createNewRecord() {
+        return _createNewRecord.apply(this, arguments);
+      }
+
+      return createNewRecord;
     }()
   }
 });
@@ -63740,7 +64144,7 @@ var render = function() {
     [
       _c("router-view"),
       _vm._v(" "),
-      _c("FlashMessage", { attrs: { position: "right top" } })
+      _c("FlashMessage", { attrs: { position: "right bottom" } })
     ],
     1
   )
@@ -63981,7 +64385,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "fa fa-plus" }),
-              _vm._v("\tCreate\n\t\t\t\t\t\t\t")
+              _vm._v(" Create\n      ")
             ]
           )
         ]),
@@ -64061,10 +64465,7 @@ var render = function() {
               attrs: { type: "button" },
               on: { click: _vm.createNewTest }
             },
-            [
-              _c("span", { staticClass: "fa fa-check" }),
-              _vm._v("\tSave\n\t\t\t\t\t")
-            ]
+            [_c("span", { staticClass: "fa fa-check" }), _vm._v(" Save\n    ")]
           )
         ]
       )
@@ -64087,7 +64488,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", [
       _c("i", { staticClass: "fas fa-table mr-1" }),
-      _vm._v("Test View\n\t\t\t\t\t\t\t")
+      _vm._v("Test View\n      ")
     ])
   },
   function() {
@@ -64119,6 +64520,487 @@ var staticRenderFns = [
             _c("td", [_vm._v("@mdo")])
           ])
         ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/Employees.vue?vue&type=template&id=1a5bb239&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/lms/Employees.vue?vue&type=template&id=1a5bb239& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container-fluid" },
+    [
+      _c("h1", { staticClass: "mt-4" }, [_vm._v("Employees")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card mb-4" }, [
+        _c("div", { staticClass: "card-header d-flex" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-sm ml-auto",
+              on: { click: _vm.createEmployee }
+            },
+            [
+              _c("span", { staticClass: "fa fa-plus" }),
+              _vm._v(" Create Employee\n        ")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("table", { staticClass: "table" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.allEmployees, function(emp, index) {
+                return _c("tr", { key: index }, [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(index + 1))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(emp.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(emp.email))]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    _vm._l(emp.roles, function(role, index) {
+                      return _c(
+                        "span",
+                        { key: index, staticClass: "badge badge-primary m-1" },
+                        [_vm._v(_vm._s(role.label) + " ")]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    _vm._l(emp.managers, function(manager, index) {
+                      return _c(
+                        "span",
+                        {
+                          key: index,
+                          staticClass: "badge badge-secondary m-1"
+                        },
+                        [_vm._v(_vm._s(manager.name) + " ")]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(emp.total_paid_leave))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(emp.paid_leave_taken))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(emp.total_sick_leave))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(emp.sick_leave_taken))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.editEmployee(emp)
+                          }
+                        }
+                      },
+                      [_vm._v("Edit")]
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "myFormModal",
+          attrs: { "hide-footer": "", title: "Add New Employee" }
+        },
+        [
+          _c("div", { staticClass: "d-block" }, [
+            _c("form", [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.name,
+                      expression: "user.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "name",
+                    placeholder: "Enter name here"
+                  },
+                  domProps: { value: _vm.user.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.name
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.name[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("Email")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.email,
+                      expression: "user.email"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "email",
+                    id: "name",
+                    placeholder: "Enter email here"
+                  },
+                  domProps: { value: _vm.user.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "email", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.email
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.email[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "role" } }, [
+                  _vm._v("Select Role")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.role_ids,
+                        expression: "user.role_ids"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "role", multiple: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.user,
+                          "role_ids",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { disabled: "", value: "" } }, [
+                      _vm._v("Please Select one")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.roles, function(role) {
+                      return _c(
+                        "option",
+                        { key: role.id, domProps: { value: role.id } },
+                        [_vm._v(" " + _vm._s(role.label))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm.errors.role_ids
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.role_ids[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "role" } }, [
+                  _vm._v("Assign Manager")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.manager_ids,
+                        expression: "user.manager_ids"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "role", multiple: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.user,
+                          "manager_ids",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { disabled: "", value: "" } }, [
+                      _vm._v("Please Select one")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.hr_managers, function(obj, index) {
+                      return _c(
+                        "option",
+                        { key: index, domProps: { value: obj.id } },
+                        [_vm._v(" " + _vm._s(obj.name))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm.errors.manager_ids
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.manager_ids[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "name" } }, [
+                  _vm._v("Total Paid Leave")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.user.total_paid_leave,
+                      expression: "user.total_paid_leave",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "name",
+                    placeholder: "Enter Total Paid Leave"
+                  },
+                  domProps: { value: _vm.user.total_paid_leave },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.user,
+                        "total_paid_leave",
+                        _vm._n($event.target.value)
+                      )
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.total_paid_leave
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.total_paid_leave[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "name" } }, [
+                  _vm._v("Total Sick Leave")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.user.total_sick_leave,
+                      expression: "user.total_sick_leave",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "name",
+                    placeholder: "Enter Total Sick Leave"
+                  },
+                  domProps: { value: _vm.user.total_sick_leave },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.user,
+                        "total_sick_leave",
+                        _vm._n($event.target.value)
+                      )
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.total_sick_leave
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.total_sick_leave[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-default",
+              attrs: { type: "button" },
+              on: { click: _vm.hideFormModal }
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button", disabled: _vm.submitingToServer },
+              on: { click: _vm.createNewRecord }
+            },
+            [
+              _c("span", { staticClass: "fa fa-check" }),
+              _vm._v(" Save\n      ")
+            ]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("i", { staticClass: "fas fa-table mr-1" }),
+      _vm._v("All Employees\n        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Roles")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Assigned HR Managers")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total Paid Leave")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Paid Leave Taken")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total Sick Leave")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Sick Leave Taken")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
       ])
     ])
   }
@@ -80409,10 +81291,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store.js */ "./resources/js/store/store.js");
 /* harmony import */ var _views_Dashboard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Dashboard.vue */ "./resources/js/views/Dashboard.vue");
 /* harmony import */ var _views_Test_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/Test.vue */ "./resources/js/views/Test.vue");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/auth_service */ "./resources/js/services/auth_service.js");
+/* harmony import */ var _views_lms_Employees_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/lms/Employees.vue */ "./resources/js/views/lms/Employees.vue");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/auth_service */ "./resources/js/services/auth_service.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 
 
 
@@ -80447,9 +81331,16 @@ var routes = [{
     meta: {
       permission_name: 'admin'
     }
+  }, {
+    path: 'employees',
+    name: 'Employees',
+    component: _views_lms_Employees_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    meta: {
+      permission_name: ['admin', 'hr']
+    }
   }],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["isLoggedIn"]()) {
+    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["isLoggedIn"]()) {
       next('/login');
     } else {
       if (checkRoutePermission(to)) {
@@ -80479,7 +81370,7 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/authentication/Login.vue */ "./resources/js/views/authentication/Login.vue"));
   },
   beforeEnter: function beforeEnter(to, from, next) {
-    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["isLoggedIn"]()) {
+    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["isLoggedIn"]()) {
       next();
     } else {
       next('/home');
@@ -80572,6 +81463,57 @@ function logout() {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
     method: 'get',
     url: '/auth/logout'
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/services/employee_service.js":
+/*!***************************************************!*\
+  !*** ./resources/js/services/employee_service.js ***!
+  \***************************************************/
+/*! exports provided: getRoles, getEmployees, getHRmanagers, addEmployee, editEmployee */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRoles", function() { return getRoles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEmployees", function() { return getEmployees; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHRmanagers", function() { return getHRmanagers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addEmployee", function() { return addEmployee; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editEmployee", function() { return editEmployee; });
+/* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
+
+function getRoles() {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'get',
+    url: 'roles'
+  });
+}
+function getEmployees() {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'get',
+    url: 'employees'
+  });
+}
+function getHRmanagers() {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'get',
+    url: 'hrmanagers'
+  });
+}
+function addEmployee(data) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'post',
+    url: '/employee',
+    data: data
+  });
+}
+function editEmployee(data) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'put',
+    url: '/employee',
+    data: data
   });
 }
 
@@ -80913,6 +81855,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Test_vue_vue_type_template_id_b28ce99e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Test_vue_vue_type_template_id_b28ce99e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/lms/Employees.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/views/lms/Employees.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Employees_vue_vue_type_template_id_1a5bb239___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Employees.vue?vue&type=template&id=1a5bb239& */ "./resources/js/views/lms/Employees.vue?vue&type=template&id=1a5bb239&");
+/* harmony import */ var _Employees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Employees.vue?vue&type=script&lang=js& */ "./resources/js/views/lms/Employees.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Employees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Employees_vue_vue_type_template_id_1a5bb239___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Employees_vue_vue_type_template_id_1a5bb239___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/lms/Employees.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/lms/Employees.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/views/lms/Employees.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Employees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Employees.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/Employees.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Employees_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/lms/Employees.vue?vue&type=template&id=1a5bb239&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/views/lms/Employees.vue?vue&type=template&id=1a5bb239& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Employees_vue_vue_type_template_id_1a5bb239___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Employees.vue?vue&type=template&id=1a5bb239& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/Employees.vue?vue&type=template&id=1a5bb239&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Employees_vue_vue_type_template_id_1a5bb239___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Employees_vue_vue_type_template_id_1a5bb239___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -15,6 +15,12 @@ class DatabaseSeeder extends Seeder
 
         \App\Role::create(['name' => 'admin', 'label'=>'Admin']);
         \App\Role::create(['name' => 'hr', 'label'=>'HR Manager']);
+        \App\Role::create(['name' => 'ceo', 'label'=>'CEO']);
+        \App\Role::create(['name' => 'cto', 'label'=>'CTO']);
+        \App\Role::create(['name' => 'sreng', 'label'=>'Seniour Engr']);
+        \App\Role::create(['name' => 'jreng', 'label'=>'Junior Engr']);
+        \App\Role::create(['name' => 'receptionist', 'label'=>'Receptionist']);
+
 
         \App\LeaveType::create(['name' => 'Paid']);
         \App\LeaveType::create(['name' => 'Sick']);
