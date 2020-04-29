@@ -64973,7 +64973,7 @@ var render = function() {
                   attrs: {
                     type: "number",
                     id: "name",
-                    placeholder: "Enter name here"
+                    placeholder: "Enter no of days here"
                   },
                   domProps: { value: _vm.leave.no_of_days },
                   on: {

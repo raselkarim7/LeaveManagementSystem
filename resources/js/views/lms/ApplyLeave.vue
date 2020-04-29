@@ -78,7 +78,7 @@
               type="number"
               class="form-control"
               id="name"
-              placeholder="Enter name here"
+              placeholder="Enter no of days here"
             />
           </div>
           <div>
