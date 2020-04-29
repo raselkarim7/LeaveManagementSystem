@@ -207,6 +207,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
@@ -504,6 +518,24 @@ var render = function() {
               _c("div", { staticClass: "sb-sidenav-menu-heading" }, [
                 _vm._v("Interface")
               ]),
+              _vm._v(" "),
+              _vm.hasPermission("admin")
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: "/home/test-view" }
+                    },
+                    [
+                      _c("div", { staticClass: "sb-nav-link-icon" }, [
+                        _c("i", { staticClass: "fas fa-tachometer-alt" })
+                      ]),
+                      _vm._v(
+                        "\n                        Employees\n                    "
+                      )
+                    ]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _vm._m(0),
               _vm._v(" "),

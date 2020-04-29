@@ -14,7 +14,18 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Test View 
                     </router-link>
+
+
+
+
                     <div class="sb-sidenav-menu-heading">Interface</div>
+                        <router-link class="nav-link" to="/home/test-view" v-if="hasPermission('admin')">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Employees
+                        </router-link>
+
+                        
+
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
                         ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Layouts
@@ -46,6 +57,9 @@
                             </div>
                         </nav>
                     </div>
+
+
+
                     <div class="sb-sidenav-menu-heading">Addons</div>
                     <a class="nav-link" href="charts.html"
                         ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
