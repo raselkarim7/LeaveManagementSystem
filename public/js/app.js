@@ -80406,16 +80406,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _views_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/Dashboard.vue */ "./resources/js/views/Dashboard.vue");
-/* harmony import */ var _views_Test_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Test.vue */ "./resources/js/views/Test.vue");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/auth_service */ "./resources/js/services/auth_service.js");
+/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store.js */ "./resources/js/store/store.js");
+/* harmony import */ var _views_Dashboard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Dashboard.vue */ "./resources/js/views/Dashboard.vue");
+/* harmony import */ var _views_Test_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/Test.vue */ "./resources/js/views/Test.vue");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/auth_service */ "./resources/js/services/auth_service.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 
+
+
+function checkRoutePermission(to) {
+  var routeObj = to.matched[to.matched.length - 1];
+
+  if (Object.prototype.hasOwnProperty.call(routeObj.meta, 'permission_name')) {
+    return _store_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters['hasPermission'](routeObj.meta.permission_name) ? true : false;
+  }
+
+  return true;
+}
+
 var routes = [{
+  path: '',
+  redirect: '/home'
+}, {
   path: '/home',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Home.vue */ "./resources/js/views/Home.vue"));
@@ -80423,18 +80439,32 @@ var routes = [{
   children: [{
     path: '',
     name: 'dashboard',
-    component: _views_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _views_Dashboard_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: 'test-view',
     name: 'TestView',
-    component: _views_Test_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _views_Test_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    meta: {
+      permission_name: 'admin'
+    }
   }],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_4__["isLoggedIn"]()) {
+    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["isLoggedIn"]()) {
       next('/login');
     } else {
-      next();
+      if (checkRoutePermission(to)) {
+        next();
+      } else {
+        next('/no-access');
+        return;
+      }
     }
+  }
+}, {
+  path: '/no-access',
+  name: 'Noaccess',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/fallback/Noaccess.vue */ "./resources/js/views/fallback/Noaccess.vue"));
   }
 }, {
   path: '/register',
@@ -80449,7 +80479,7 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/authentication/Login.vue */ "./resources/js/views/authentication/Login.vue"));
   },
   beforeEnter: function beforeEnter(to, from, next) {
-    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_4__["isLoggedIn"]()) {
+    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["isLoggedIn"]()) {
       next();
     } else {
       next('/home');
@@ -80636,7 +80666,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     serverPath: 'http://localhost:8000',
     token: _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].token.getToken(),
     user: {},
-    roles: []
+    roles: _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].roles.getRoles() || []
   },
   mutations: {
     SET_TOKEN: function SET_TOKEN(state, token) {
@@ -80668,6 +80698,30 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       var commit = _ref3.commit,
           state = _ref3.state;
       commit('SET_ROLES', value);
+    }
+  },
+  getters: {
+    hasPermission: function hasPermission(state) {
+      return function (permission_name) {
+        /* parameter can be string of single or multiple for Array, EVEN '' or [] */
+        if (Array.isArray(permission_name)) {
+          if (permission_name.length === 0) {
+            return true;
+          }
+
+          return permission_name.some(function (item) {
+            return state.roles.includes(item);
+          });
+        }
+
+        if (typeof permission_name === 'string') {
+          if (permission_name.length === 0) {
+            return true;
+          }
+        }
+
+        return state.roles.includes(permission_name);
+      };
     }
   }
 }));

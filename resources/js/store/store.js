@@ -12,7 +12,7 @@ export default new Vuex.Store({
 
         token: storage.token.getToken(), 
         user: {}, 
-        roles: []
+        roles: storage.roles.getRoles() || []
 
     },
     mutations: {
@@ -44,6 +44,25 @@ export default new Vuex.Store({
             commit('SET_ROLES', value)
         },
 
-    }
+    },
+    getters: { 
+        hasPermission: state => (permission_name) => {
+            /* parameter can be string of single or multiple for Array, EVEN '' or [] */
+            if (Array.isArray(permission_name)) {
+                if (permission_name.length === 0) {
+                    return true; 
+                }
+              return permission_name.some(item => state.roles.includes(item));
+            }
+            if (typeof(permission_name) === 'string') {
+                if(permission_name.length === 0 ) {
+                    return true; 
+                }
+            }
+            return state.roles.includes(permission_name)
+          },
+  
+     }
+
 
 })

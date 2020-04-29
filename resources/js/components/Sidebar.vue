@@ -8,7 +8,9 @@
                         ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </router-link>
-                    <router-link class="nav-link" to="/home/test-view">
+                    <router-link class="nav-link" to="/home/test-view"
+                        v-if="hasPermission('admin')"
+                    >
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Test View 
                     </router-link>
@@ -63,7 +65,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-    name: 'Sidebar'
+    name: 'Sidebar', 
+
+    computed: {
+        ...mapGetters([
+            'hasPermission',
+        ])
+    }
 }
 </script>
