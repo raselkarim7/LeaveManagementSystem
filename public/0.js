@@ -233,6 +233,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
@@ -562,6 +567,24 @@ var render = function() {
                       ]),
                       _vm._v(
                         "\n                        Apply Leave\n                    "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.hasPermission(["admin", "hr"])
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: "/home/approve-leave" }
+                    },
+                    [
+                      _c("div", { staticClass: "sb-nav-link-icon" }, [
+                        _c("i", { staticClass: "fas fa-tachometer-alt" })
+                      ]),
+                      _vm._v(
+                        "\n                        Approve Leave\n                    "
                       )
                     ]
                   )

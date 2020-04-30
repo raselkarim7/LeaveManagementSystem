@@ -8,6 +8,7 @@ import Test from './views/Test.vue';
 
 import Employees from './views/lms/Employees.vue'
 import ApplyLeave from './views/lms/ApplyLeave.vue'
+import ApproveLeave from './views/lms/ApproveLeave'
 
 import * as auth from './services/auth_service'; 
 
@@ -61,6 +62,14 @@ const routes = [
                 },
           
             }, 
+            {
+                path: 'approve-leave',
+                name: 'ApproveLeave', 
+                component: ApproveLeave, 
+                meta: {
+                    permission_name: ['admin', 'hr']
+                },            
+            }
             
             
         ], 

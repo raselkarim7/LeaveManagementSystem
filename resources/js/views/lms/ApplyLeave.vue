@@ -189,7 +189,7 @@ export default {
     leaveStatusClass: param => {
         let design = ''; 
         if (param === 'pending') {
-            design = 'primary'
+            design = 'secondary'
         } else if  (param === 'approved') {
             design = 'success'
         } else if (param === 'approved') {

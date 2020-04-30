@@ -46,4 +46,10 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'user_manager', 'user_id', 'manager_id')
             ->select(['id','name','email']);
     }
+
+    public function subordinateUsers() {
+        return $this->belongsToMany(User::class, 'user_manager', 'manager_id', 'user_id')
+            ->select(['id','name','email']);
+    }
+
 }

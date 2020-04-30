@@ -29,6 +29,11 @@
                             Apply Leave
                         </router-link>
                         
+                        
+                        <router-link class="nav-link" to="/home/approve-leave" v-if="hasPermission(['admin', 'hr'])">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Approve Leave
+                        </router-link>
 
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
                         ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>

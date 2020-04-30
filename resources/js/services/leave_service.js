@@ -21,3 +21,10 @@ export function appliedLeaves() {
         url: 'applied-leaves',
     })
 }
+
+export function pendingApplications() {
+    return http({
+        method: 'get', 
+        url: 'pending-applications',
+    })
+}

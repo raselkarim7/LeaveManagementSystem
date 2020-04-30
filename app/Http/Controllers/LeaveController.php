@@ -7,6 +7,7 @@ use App\LeaveType;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class LeaveController extends Controller
@@ -122,6 +123,23 @@ class LeaveController extends Controller
 
     public function appliedLeaves(Request $request) {
         return Leave::where('applied_by', Auth::id())->with('leaveType')->get();
+    }
+
+    /**
+     * Fetch Subordinate Users pending applications under a manager
+     */
+    public function pendingApplications(Request $request) {
+        $manager_id = Auth::id();
+        $subordinateUserIds = DB::table('user_manager')
+            ->where('manager_id', $manager_id)
+            ->pluck('user_id');
+
+        $pendingLeaves = Leave::where('status', self::PENDING)
+            ->whereIn('applied_by', $subordinateUserIds)
+            ->with('leaveType')
+            ->get();
+
+        return $pendingLeaves;
     }
 
     /**
