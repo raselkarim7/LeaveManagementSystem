@@ -8,7 +8,7 @@
     <div class="card mb-4">
       <div class="card-header d-flex">
         <span>
-          <i class="fas fa-table mr-1"></i>Leaves & Info
+          <i class="fas fa-table mr-1"></i>My Leaves & Info
         </span>
 
         <button class="btn btn-primary btn-sm ml-auto" @click="showFormModal">
@@ -60,7 +60,7 @@
     <div class="card mb-4">
       <div class="card-header d-flex">
         <span>
-          <i class="fas fa-table mr-1"></i>Leave Applications
+          <i class="fas fa-table mr-1"></i>My Leave Applications
         </span>
 
         <!-- <button class="btn btn-primary btn-sm ml-auto" @click="showFormModal">

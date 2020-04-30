@@ -2508,7 +2508,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var design = '';
 
     if (param === 'pending') {
-      design = 'primary';
+      design = 'secondary';
     } else if (param === 'approved') {
       design = 'success';
     } else if (param === 'approved') {
@@ -68820,7 +68820,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", [
       _c("i", { staticClass: "fas fa-table mr-1" }),
-      _vm._v("Leaves & Info\n      ")
+      _vm._v("My Leaves & Info\n      ")
     ])
   },
   function() {
@@ -68854,7 +68854,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header d-flex" }, [
       _c("span", [
         _c("i", { staticClass: "fas fa-table mr-1" }),
-        _vm._v("Leave Applications\n      ")
+        _vm._v("My Leave Applications\n      ")
       ])
     ])
   },

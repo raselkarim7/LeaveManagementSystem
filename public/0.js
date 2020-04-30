@@ -208,36 +208,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
@@ -536,24 +506,6 @@ var render = function() {
                 _vm._v("Interface")
               ]),
               _vm._v(" "),
-              _vm.hasPermission(["admin", "hr"])
-                ? _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { to: "/home/employees" }
-                    },
-                    [
-                      _c("div", { staticClass: "sb-nav-link-icon" }, [
-                        _c("i", { staticClass: "fas fa-tachometer-alt" })
-                      ]),
-                      _vm._v(
-                        "\n                        Employees\n                    "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
               _vm.hasPermission([])
                 ? _c(
                     "router-link",
@@ -563,10 +515,34 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "sb-nav-link-icon" }, [
-                        _c("i", { staticClass: "fas fa-tachometer-alt" })
+                        _c("i", { staticClass: "fas fa-book-open" })
                       ]),
                       _vm._v(
                         "\n                        Apply Leave\n                    "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "sb-sidenav-menu-heading" }, [
+                _vm._v("Administrations")
+              ]),
+              _vm._v(" "),
+              _vm.hasPermission(["admin", "hr"])
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: "/home/employees" }
+                    },
+                    [
+                      _c("div", { staticClass: "sb-nav-link-icon" }, [
+                        _c("i", { staticClass: "fas fa-user-friends" })
+                      ]),
+                      _vm._v(
+                        "\n                        Employees\n                    "
                       )
                     ]
                   )
@@ -581,67 +557,25 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "sb-nav-link-icon" }, [
-                        _c("i", { staticClass: "fas fa-tachometer-alt" })
+                        _c("i", { staticClass: "fas fa-user-edit" })
                       ]),
                       _vm._v(
                         "\n                        Approve Leave\n                    "
                       )
                     ]
                   )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", { staticClass: "sb-sidenav-menu-heading" }, [
-                _vm._v("Addons")
-              ]),
-              _vm._v(" "),
-              _vm._m(4),
-              _vm._m(5)
+                : _vm._e()
             ],
             1
           )
         ]),
         _vm._v(" "),
-        _vm._m(6)
+        _vm._m(1)
       ]
     )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapseLayouts",
-          "aria-expanded": "false",
-          "aria-controls": "collapseLayouts"
-        }
-      },
-      [
-        _c("div", { staticClass: "sb-nav-link-icon" }, [
-          _c("i", { staticClass: "fas fa-columns" })
-        ]),
-        _vm._v("\n                    Layouts\n                    "),
-        _c("div", { staticClass: "sb-sidenav-collapse-arrow" }, [
-          _c("i", { staticClass: "fas fa-angle-down" })
-        ])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -672,197 +606,6 @@ var staticRenderFns = [
             [_vm._v("Light Sidenav")]
           )
         ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapsePages",
-          "aria-expanded": "false",
-          "aria-controls": "collapsePages"
-        }
-      },
-      [
-        _c("div", { staticClass: "sb-nav-link-icon" }, [
-          _c("i", { staticClass: "fas fa-book-open" })
-        ]),
-        _vm._v("\n                    Pages\n                    "),
-        _c("div", { staticClass: "sb-sidenav-collapse-arrow" }, [
-          _c("i", { staticClass: "fas fa-angle-down" })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "collapse",
-        attrs: {
-          id: "collapsePages",
-          "aria-labelledby": "headingTwo",
-          "data-parent": "#sidenavAccordion"
-        }
-      },
-      [
-        _c(
-          "nav",
-          {
-            staticClass: "sb-sidenav-menu-nested nav accordion",
-            attrs: { id: "sidenavAccordionPages" }
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link collapsed",
-                attrs: {
-                  href: "#",
-                  "data-toggle": "collapse",
-                  "data-target": "#pagesCollapseAuth",
-                  "aria-expanded": "false",
-                  "aria-controls": "pagesCollapseAuth"
-                }
-              },
-              [
-                _vm._v("Authentication\n                            "),
-                _c("div", { staticClass: "sb-sidenav-collapse-arrow" }, [
-                  _c("i", { staticClass: "fas fa-angle-down" })
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse",
-                attrs: {
-                  id: "pagesCollapseAuth",
-                  "aria-labelledby": "headingOne",
-                  "data-parent": "#sidenavAccordionPages"
-                }
-              },
-              [
-                _c("nav", { staticClass: "sb-sidenav-menu-nested nav" }, [
-                  _c(
-                    "a",
-                    { staticClass: "nav-link", attrs: { href: "login.html" } },
-                    [_vm._v("Login")]
-                  ),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: "register.html" }
-                    },
-                    [_vm._v("Register")]
-                  ),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { href: "password.html" }
-                    },
-                    [_vm._v("Forgot Password")]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "nav-link collapsed",
-                attrs: {
-                  href: "#",
-                  "data-toggle": "collapse",
-                  "data-target": "#pagesCollapseError",
-                  "aria-expanded": "false",
-                  "aria-controls": "pagesCollapseError"
-                }
-              },
-              [
-                _vm._v("Error\n                            "),
-                _c("div", { staticClass: "sb-sidenav-collapse-arrow" }, [
-                  _c("i", { staticClass: "fas fa-angle-down" })
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse",
-                attrs: {
-                  id: "pagesCollapseError",
-                  "aria-labelledby": "headingOne",
-                  "data-parent": "#sidenavAccordionPages"
-                }
-              },
-              [
-                _c("nav", { staticClass: "sb-sidenav-menu-nested nav" }, [
-                  _c(
-                    "a",
-                    { staticClass: "nav-link", attrs: { href: "401.html" } },
-                    [_vm._v("401 Page")]
-                  ),
-                  _c(
-                    "a",
-                    { staticClass: "nav-link", attrs: { href: "404.html" } },
-                    [_vm._v("404 Page")]
-                  ),
-                  _c(
-                    "a",
-                    { staticClass: "nav-link", attrs: { href: "500.html" } },
-                    [_vm._v("500 Page")]
-                  )
-                ])
-              ]
-            )
-          ]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "nav-link", attrs: { href: "charts.html" } },
-      [
-        _c("div", { staticClass: "sb-nav-link-icon" }, [
-          _c("i", { staticClass: "fas fa-chart-area" })
-        ]),
-        _vm._v("\n                    Charts")
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "nav-link", attrs: { href: "tables.html" } },
-      [
-        _c("div", { staticClass: "sb-nav-link-icon" }, [
-          _c("i", { staticClass: "fas fa-table" })
-        ]),
-        _vm._v("\n                    Tables")
       ]
     )
   },
