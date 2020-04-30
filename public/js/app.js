@@ -68973,7 +68973,7 @@ var render = function() {
                     _c(
                       "span",
                       {
-                        staticClass: "btn btn-success btn-sm mr-2",
+                        staticClass: "btn btn-success btn-sm m-1",
                         attrs: { title: "Approve" },
                         on: {
                           click: function($event) {
@@ -68987,7 +68987,7 @@ var render = function() {
                     _c(
                       "span",
                       {
-                        staticClass: "btn btn-danger btn-sm",
+                        staticClass: "btn btn-danger btn-sm m-1",
                         attrs: { title: "Reject" },
                         on: {
                           click: function($event) {
