@@ -187,7 +187,7 @@ export default {
             design = 'secondary'
         } else if  (param === 'approved') {
             design = 'success'
-        } else if (param === 'approved') {
+        } else if (param === 'rejected') {
             design = 'danger'
         }
         return  `badge badge-pill badge-${design}`
