@@ -503,7 +503,7 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "sb-sidenav-menu-heading" }, [
-                _vm._v("Interface")
+                _vm._v("USER Panel")
               ]),
               _vm._v(" "),
               _vm.hasPermission([])
