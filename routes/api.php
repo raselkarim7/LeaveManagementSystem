@@ -17,3 +17,47 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/test', function(Request $request) {
+    $data = $request->all();
+    $data['fromServer'] = 'yessssssss';
+    return $data;
+    return 'Test api request successful';
+});
+
+
+Route::group([
+    'prefix' => 'auth'
+], function () {
+    Route::post('login', 'AuthController@login');
+    Route::post('signup', 'AuthController@signup');
+
+    Route::group([
+        'middleware' => 'auth:api'
+    ], function() {
+
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@user');
+    });
+});
+
+
+Route::group([
+    'middleware' => 'auth:api'
+], function() {
+    Route::get('roles', 'RoleController@index');
+    Route::get('employees', 'UserController@getEmployees');
+    Route::get('hrmanagers', 'UserController@getHRmanagers');
+    Route::post('employee', 'UserController@addEmployee');
+    Route::put('employee', 'UserController@editEmployee');
+
+
+    Route::get('leave-types', 'LeaveController@leaveTypes');
+    Route::post('add-leave', 'LeaveController@store');
+    Route::get('applied-leaves', 'LeaveController@appliedLeaves');
+    Route::get('pending-applications', 'LeaveController@pendingApplications');
+    Route::get('approved-or-rejected-applications', 'LeaveController@approvedOrRejectedApplications');
+    Route::post('leave-approval', 'LeaveController@leaveApproval');
+
+
+});
