@@ -2691,7 +2691,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       design = 'secondary';
     } else if (param === 'approved') {
       design = 'success';
-    } else if (param === 'approved') {
+    } else if (param === 'rejected') {
       design = 'danger';
     }
 
