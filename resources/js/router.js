@@ -9,6 +9,7 @@ import Test from './views/Test.vue';
 import Employees from './views/lms/Employees.vue'
 import ApplyLeave from './views/lms/ApplyLeave.vue'
 import ApproveLeave from './views/lms/ApproveLeave'
+import ChangePassword from './views/lms/ChangePassword'
 
 import * as auth from './services/auth_service'; 
 
@@ -69,7 +70,17 @@ const routes = [
                 meta: {
                     permission_name: ['admin', 'hr']
                 },            
-            }
+            }, 
+            {
+                path: 'change-password',
+                name: 'ChangePassword', 
+                component: ChangePassword, 
+                meta: {
+                    permission_name: []
+                },            
+            }, 
+
+            
             
             
         ], 

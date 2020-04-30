@@ -30,9 +30,15 @@
                 <div class="card bg-success text-white mb-4">
                     <div class="card-body">Roles </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <ul>
-                            <li v-for="role in roles" :key="role.id"> {{role.label}} </li>
-                        </ul>
+                        <div v-if="hasPermission(['admin', 'hr'])"> 
+                            <ul>
+                                <li v-for="role in roles" :key="role.id"> {{role.label}} </li>
+                            </ul>
+                        </div>
+                        <div v-else> 
+                            You have no permission to see. Only Adminstrators & Managers will see this.
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -40,9 +46,12 @@
                 <div class="card bg-secondary text-white mb-4">
                     <div class="card-body">HR Managers </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <ul>
-                            <li v-for="obj in hr_managers" :key="obj.id"> {{obj.name}} </li>
-                        </ul>
+                        <div v-if="hasPermission(['admin', 'hr'])"> 
+                            <ul>
+                                <li v-for="obj in hr_managers" :key="obj.id"> {{obj.name}} </li>
+                            </ul>
+                        </div>
+                        <div v-else>You have no permission to see. Only Adminstrators & Managers will see this.</div>
                     </div>
                 </div>
             </div>
@@ -65,7 +74,7 @@
 <script>
 import * as employeeService from "../services/employee_service";
 import * as authService from "../services/auth_service";
-
+import { mapGetters } from 'vuex'
 export default {
     name: 'Dashboard', 
     data() {
@@ -84,6 +93,11 @@ export default {
         this.fetchHRmanagers()
         this.getLoginUserInfo()
         
+    },
+    computed: {
+        ...mapGetters([
+            'hasPermission',
+        ])
     },
     methods: {
         fetchEmployeees: async function() {

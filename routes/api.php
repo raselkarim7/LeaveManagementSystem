@@ -59,5 +59,8 @@ Route::group([
     Route::get('approved-or-rejected-applications', 'LeaveController@approvedOrRejectedApplications');
     Route::post('leave-approval', 'LeaveController@leaveApproval');
 
+    Route::post('change-password', 'AuthController@changePassword');
+
+
 
 });

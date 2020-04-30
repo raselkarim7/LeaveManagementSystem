@@ -208,6 +208,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
@@ -464,24 +469,6 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.hasPermission("admin")
-                ? _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { to: "/home/test-view" }
-                    },
-                    [
-                      _c("div", { staticClass: "sb-nav-link-icon" }, [
-                        _c("i", { staticClass: "fas fa-tachometer-alt" })
-                      ]),
-                      _vm._v(
-                        "\n                    Test View \n                "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
               _c("div", { staticClass: "sb-sidenav-menu-heading" }, [
                 _vm._v("USER Panel")
               ]),
@@ -499,6 +486,24 @@ var render = function() {
                       ]),
                       _vm._v(
                         "\n                        Apply Leave\n                    "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.hasPermission([])
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: "/home/change-password" }
+                    },
+                    [
+                      _c("div", { staticClass: "sb-nav-link-icon" }, [
+                        _c("i", { staticClass: "fas fa-key" })
+                      ]),
+                      _vm._v(
+                        "\n                        Change Password\n                    "
                       )
                     ]
                   )
