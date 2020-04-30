@@ -8,12 +8,13 @@
                         ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </router-link>
+                    <!-- 
                     <router-link class="nav-link" to="/home/test-view"
                         v-if="hasPermission('admin')"
                     >
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Test View 
-                    </router-link>
+                    </router-link> -->
 
 
 
@@ -24,6 +25,10 @@
                         <router-link class="nav-link" to="/home/apply-leave" v-if="hasPermission([])">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Apply Leave
+                        </router-link>
+                        <router-link class="nav-link" to="/home/change-password" v-if="hasPermission([])">
+                            <div class="sb-nav-link-icon"><i class="fas fa-key"></i></div>
+                            Change Password
                         </router-link>
                         
                     

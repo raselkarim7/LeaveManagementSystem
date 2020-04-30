@@ -6,6 +6,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -69,5 +70,35 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response()->json(User::with('roles')->with('managers')->find( Auth::id() ));
+    }
+
+    public function changePassword(Request $request) {
+
+
+        $user = User::where('id', Auth::id())->select(['id','password'])->first();
+        $result = Hash::check($request->old_password, $user->password);
+
+        if ($result === false) {
+            return response()->json([
+                'message' => 'Password not matched',
+                "errors" => [
+                    "old_password" => ['Old password not matched']
+                ]
+            ], 422);
+        }
+
+
+
+        $request->validate([
+            'password' => 'required|string|confirmed'
+        ]);
+
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return response()->json([
+            'message' => 'Password Changed Successfully'
+        ]);
+
     }
 }

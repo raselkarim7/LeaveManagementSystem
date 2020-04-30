@@ -73,14 +73,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Header',
   data: function data() {
-    return {};
+    return {
+      user: _utils_storage__WEBPACK_IMPORTED_MODULE_2__["default"].user.getUser()
+    };
   },
   methods: {
     toogleSideBar: function toogleSideBar() {
@@ -149,6 +149,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -330,9 +335,10 @@ var render = function() {
     "nav",
     { staticClass: "sb-topnav navbar navbar-expand navbar-dark bg-dark" },
     [
-      _c("a", { staticClass: "navbar-brand", attrs: { href: "index.html" } }, [
-        _vm._v("Start Bootstrap")
+      _c("router-link", { staticClass: "navbar-brand", attrs: { to: "/" } }, [
+        _vm._v("Leave Manage System")
       ]),
+      _vm._v(" "),
       _c(
         "button",
         {
@@ -343,11 +349,22 @@ var render = function() {
         [_c("i", { staticClass: "fas fa-bars" })]
       ),
       _vm._v(" "),
-      _vm._m(0),
+      _c(
+        "form",
+        {
+          staticClass:
+            "d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+        },
+        [
+          _c("div", { staticClass: "input-group text-white" }, [
+            _c("h5", [_vm._v(_vm._s(_vm.user.name))])
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c("ul", { staticClass: "navbar-nav ml-auto ml-md-0" }, [
         _c("li", { staticClass: "nav-item dropdown" }, [
-          _vm._m(1),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "div",
@@ -377,43 +394,11 @@ var render = function() {
           )
         ])
       ])
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "form",
-      {
-        staticClass:
-          "d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
-      },
-      [
-        _c("div", { staticClass: "input-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              placeholder: "Search for...",
-              "aria-label": "Search",
-              "aria-describedby": "basic-addon2"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "button" } },
-              [_c("i", { staticClass: "fas fa-search" })]
-            )
-          ])
-        ])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -484,24 +469,6 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.hasPermission("admin")
-                ? _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { to: "/home/test-view" }
-                    },
-                    [
-                      _c("div", { staticClass: "sb-nav-link-icon" }, [
-                        _c("i", { staticClass: "fas fa-tachometer-alt" })
-                      ]),
-                      _vm._v(
-                        "\n                    Test View \n                "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
               _c("div", { staticClass: "sb-sidenav-menu-heading" }, [
                 _vm._v("USER Panel")
               ]),
@@ -519,6 +486,24 @@ var render = function() {
                       ]),
                       _vm._v(
                         "\n                        Apply Leave\n                    "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.hasPermission([])
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: "/home/change-password" }
+                    },
+                    [
+                      _c("div", { staticClass: "sb-nav-link-icon" }, [
+                        _c("i", { staticClass: "fas fa-key" })
+                      ]),
+                      _vm._v(
+                        "\n                        Change Password\n                    "
                       )
                     ]
                   )

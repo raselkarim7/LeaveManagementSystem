@@ -2072,6 +2072,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_employee_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/employee_service */ "./resources/js/services/employee_service.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/auth_service */ "./resources/js/services/auth_service.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2139,8 +2156,176 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Dashboard'
+  name: 'Dashboard',
+  data: function data() {
+    return {
+      total_employeees: '',
+      roles: [],
+      hr_managers: [],
+      user: {
+        roles: []
+      }
+    };
+  },
+  created: function created() {
+    this.fetchEmployeees();
+    this.fetchRoles();
+    this.fetchHRmanagers();
+    this.getLoginUserInfo();
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['hasPermission'])),
+  methods: {
+    fetchEmployeees: function () {
+      var _fetchEmployeees = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getEmployees"]();
+
+              case 3:
+                response = _context.sent;
+                this.total_employeees = response.data.length;
+                _context.next = 9;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[0, 7]]);
+      }));
+
+      function fetchEmployeees() {
+        return _fetchEmployeees.apply(this, arguments);
+      }
+
+      return fetchEmployeees;
+    }(),
+    fetchRoles: function () {
+      var _fetchRoles = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getRoles"]();
+
+              case 3:
+                response = _context2.sent;
+                this.roles = response.data;
+                _context2.next = 9;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 7]]);
+      }));
+
+      function fetchRoles() {
+        return _fetchRoles.apply(this, arguments);
+      }
+
+      return fetchRoles;
+    }(),
+    fetchHRmanagers: function () {
+      var _fetchHRmanagers = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getHRmanagers"]();
+
+              case 3:
+                response = _context3.sent;
+                this.hr_managers = response.data;
+                _context3.next = 9;
+                break;
+
+              case 7:
+                _context3.prev = 7;
+                _context3.t0 = _context3["catch"](0);
+
+              case 9:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 7]]);
+      }));
+
+      function fetchHRmanagers() {
+        return _fetchHRmanagers.apply(this, arguments);
+      }
+
+      return fetchHRmanagers;
+    }(),
+    getLoginUserInfo: function () {
+      var _getLoginUserInfo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["getUser"]();
+
+              case 3:
+                response = _context4.sent;
+                this.user = response.data;
+                _context4.next = 9;
+                break;
+
+              case 7:
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](0);
+
+              case 9:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[0, 7]]);
+      }));
+
+      function getLoginUserInfo() {
+        return _getLoginUserInfo.apply(this, arguments);
+      }
+
+      return getLoginUserInfo;
+    }()
+  }
 });
 
 /***/ }),
@@ -3027,6 +3212,172 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee4);
+      }));
+
+      function createNewRecord() {
+        return _createNewRecord.apply(this, arguments);
+      }
+
+      return createNewRecord;
+    }()
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ChangePassword.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/lms/ChangePassword.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/auth_service */ "./resources/js/services/auth_service.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//import * as testService from '../services/test_service'
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ChangePassword",
+  data: function data() {
+    return {
+      submitingToServer: true,
+      password: {
+        old_password: "",
+        password: "",
+        password_confirmation: ""
+      },
+      errors: {}
+    };
+  },
+  created: function created() {},
+  methods: {
+    hideTestModal: function hideTestModal() {
+      this.$refs.myTestModal.hide();
+    },
+    showTestModal: function showTestModal() {
+      this.password = {
+        old_password: "",
+        password: "",
+        password_confirmation: ""
+      };
+      this.$refs.myTestModal.show();
+    },
+    createNewRecord: function () {
+      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.submitingToServer = true;
+                _context.prev = 1;
+                _context.next = 4;
+                return _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["changePassword"](this.password);
+
+              case 4:
+                response = _context.sent;
+                this.submitingToServer = false;
+                this.flashMessage.success({
+                  message: "Password Changed successfully",
+                  time: 2000
+                });
+                this.hideTestModal();
+                _context.next = 21;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](1);
+                this.submitingToServer = false;
+                _context.t1 = _context.t0.response.status;
+                _context.next = _context.t1 === 422 ? 16 : _context.t1 === 500 ? 18 : 20;
+                break;
+
+              case 16:
+                this.errors = _context.t0.response.data.errors; //console.log("errors =========== ", this.errors);
+
+                return _context.abrupt("break", 21);
+
+              case 18:
+                this.flashMessage.error({
+                  message: _context.t0.response.data.message,
+                  time: 2000
+                });
+                return _context.abrupt("break", 21);
+
+              case 20:
+                return _context.abrupt("break", 21);
+
+              case 21:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[1, 10]]);
       }));
 
       function createNewRecord() {
@@ -68126,176 +68477,176 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("h1", { staticClass: "mt-4" }, [_vm._v("Dashboard")]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+        _c("div", { staticClass: "card bg-info text-white mb-4" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _vm._v("Logged In User Info")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-footer d-flex align-items-center justify-content-between"
+            },
+            [
+              _c("ul", [
+                _c("li", [
+                  _c("b", [_vm._v("Name:")]),
+                  _vm._v(" " + _vm._s(_vm.user.name) + " ")
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("b", [_vm._v("Email:")]),
+                  _vm._v(" " + _vm._s(_vm.user.email) + " ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("b", [_vm._v("Roles:")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.user.roles, function(role) {
+                      return _c(
+                        "span",
+                        {
+                          key: role.id,
+                          staticClass: "m-1 badge badge-secondary"
+                        },
+                        [_vm._v(_vm._s(role.label))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("li", [
+                  _c("b", [_vm._v("Total paid leave:")]),
+                  _vm._v(" " + _vm._s(_vm.user.total_paid_leave) + " ")
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("b", [_vm._v("Paid leave taken:")]),
+                  _vm._v(" " + _vm._s(_vm.user.paid_leave_taken) + " ")
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("b", [_vm._v("Total sick leave:")]),
+                  _vm._v(" " + _vm._s(_vm.user.total_sick_leave) + " ")
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("b", [_vm._v("Sick leave taken:")]),
+                  _vm._v(" " + _vm._s(_vm.user.sick_leave_taken) + " ")
+                ])
+              ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+        _c("div", { staticClass: "card bg-success text-white mb-4" }, [
+          _c("div", { staticClass: "card-body" }, [_vm._v("Roles ")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-footer d-flex align-items-center justify-content-between"
+            },
+            [
+              _vm.hasPermission(["admin", "hr"])
+                ? _c("div", [
+                    _c(
+                      "ul",
+                      _vm._l(_vm.roles, function(role) {
+                        return _c("li", { key: role.id }, [
+                          _vm._v(" " + _vm._s(role.label) + " ")
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                : _c("div", [
+                    _vm._v(
+                      " \n                        You have no permission to see. Only Adminstrators & Managers will see this.\n                    "
+                    )
+                  ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+        _c("div", { staticClass: "card bg-secondary text-white mb-4" }, [
+          _c("div", { staticClass: "card-body" }, [_vm._v("HR Managers ")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-footer d-flex align-items-center justify-content-between"
+            },
+            [
+              _vm.hasPermission(["admin", "hr"])
+                ? _c("div", [
+                    _c(
+                      "ul",
+                      _vm._l(_vm.hr_managers, function(obj) {
+                        return _c("li", { key: obj.id }, [
+                          _vm._v(" " + _vm._s(obj.name) + " ")
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                : _c("div", [
+                    _vm._v(
+                      "You have no permission to see. Only Adminstrators & Managers will see this."
+                    )
+                  ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+        _c("div", { staticClass: "card bg-primary text-white mb-4" }, [
+          _c("div", { staticClass: "card-body" }, [_vm._v("Total Employees")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-footer d-flex align-items-center justify-content-between"
+            },
+            [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.total_employeees) +
+                  "\n                "
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-fluid" }, [
-      _c("h1", { staticClass: "mt-4" }, [_vm._v("Dashboard")]),
-      _vm._v(" "),
-      _c("ol", { staticClass: "breadcrumb mb-4" }, [
-        _c("li", { staticClass: "breadcrumb-item active" }, [
-          _vm._v("Dashboard")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-xl-3 col-md-6" }, [
-          _c("div", { staticClass: "card bg-primary text-white mb-4" }, [
-            _c("div", { staticClass: "card-body" }, [_vm._v("Primary Card")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "card-footer d-flex align-items-center justify-content-between"
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "small text-white stretched-link",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("View Details")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "small text-white" }, [
-                  _c("i", { staticClass: "fas fa-angle-right" })
-                ])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6" }, [
-          _c("div", { staticClass: "card bg-warning text-white mb-4" }, [
-            _c("div", { staticClass: "card-body" }, [_vm._v("Warning Card")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "card-footer d-flex align-items-center justify-content-between"
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "small text-white stretched-link",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("View Details")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "small text-white" }, [
-                  _c("i", { staticClass: "fas fa-angle-right" })
-                ])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6" }, [
-          _c("div", { staticClass: "card bg-success text-white mb-4" }, [
-            _c("div", { staticClass: "card-body" }, [_vm._v("Success Card")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "card-footer d-flex align-items-center justify-content-between"
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "small text-white stretched-link",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("View Details")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "small text-white" }, [
-                  _c("i", { staticClass: "fas fa-angle-right" })
-                ])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6" }, [
-          _c("div", { staticClass: "card bg-danger text-white mb-4" }, [
-            _c("div", { staticClass: "card-body" }, [_vm._v("Danger Card")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "card-footer d-flex align-items-center justify-content-between"
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "small text-white stretched-link",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v("View Details")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "small text-white" }, [
-                  _c("i", { staticClass: "fas fa-angle-right" })
-                ])
-              ]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-xl-6" }, [
-          _c("div", { staticClass: "card mb-4" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _c("i", { staticClass: "fas fa-chart-area mr-1" }),
-              _vm._v("Area Chart Example")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("canvas", {
-                attrs: { id: "myAreaChart", width: "100%", height: "40" }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-6" }, [
-          _c("div", { staticClass: "card mb-4" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _c("i", { staticClass: "fas fa-chart-bar mr-1" }),
-              _vm._v("Bar Chart Example")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("canvas", {
-                attrs: { id: "myBarChart", width: "100%", height: "40" }
-              })
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card mb-4" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("i", { staticClass: "fas fa-table mr-1" }),
-          _vm._v("DataTable Example")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" })
-      ])
+    return _c("ol", { staticClass: "breadcrumb mb-4" }, [
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Dashboard")])
     ])
   }
 ]
@@ -69207,6 +69558,204 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ChangePassword.vue?vue&type=template&id=3c81ee67&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/lms/ChangePassword.vue?vue&type=template&id=3c81ee67& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container-fluid" },
+    [
+      _c("div", { staticClass: "ml-3 mt-5 " }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-sm ml-auto",
+            on: { click: _vm.showTestModal }
+          },
+          [
+            _c("span", { staticClass: "fa fa-key" }),
+            _vm._v(" Click Here To Change Password\n      ")
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "myTestModal",
+          attrs: { "hide-footer": "", title: "Add New Employee" }
+        },
+        [
+          _c("div", { staticClass: "d-block" }, [
+            _c("form", [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "old_password" } }, [
+                  _vm._v("Old Password")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password.old_password,
+                      expression: "password.old_password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    id: "old_password",
+                    placeholder: "Enter old password"
+                  },
+                  domProps: { value: _vm.password.old_password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.password,
+                        "old_password",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.old_password
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.old_password[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "password" } }, [
+                  _vm._v("New Password")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password.password,
+                      expression: "password.password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    id: "password",
+                    placeholder: "Enter new password"
+                  },
+                  domProps: { value: _vm.password.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.password, "password", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.password
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.password[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "password_confirmation" } }, [
+                  _vm._v("Confirm password")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password.password_confirmation,
+                      expression: "password.password_confirmation"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    id: "password_confirmation",
+                    placeholder: "Enter Confirm password"
+                  },
+                  domProps: { value: _vm.password.password_confirmation },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.password,
+                        "password_confirmation",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.password_confirmation
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.password_confirmation[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-default",
+              attrs: { type: "button" },
+              on: { click: _vm.hideTestModal }
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: { click: _vm.createNewRecord }
+            },
+            [_c("span", { staticClass: "fa fa-check" }), _vm._v(" Save\n    ")]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -86034,10 +86583,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_lms_Employees_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/lms/Employees.vue */ "./resources/js/views/lms/Employees.vue");
 /* harmony import */ var _views_lms_ApplyLeave_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/lms/ApplyLeave.vue */ "./resources/js/views/lms/ApplyLeave.vue");
 /* harmony import */ var _views_lms_ApproveLeave__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/lms/ApproveLeave */ "./resources/js/views/lms/ApproveLeave.vue");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/auth_service */ "./resources/js/services/auth_service.js");
+/* harmony import */ var _views_lms_ChangePassword__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./views/lms/ChangePassword */ "./resources/js/views/lms/ChangePassword.vue");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/auth_service */ "./resources/js/services/auth_service.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 
 
 
@@ -86096,9 +86647,16 @@ var routes = [{
     meta: {
       permission_name: ['admin', 'hr']
     }
+  }, {
+    path: 'change-password',
+    name: 'ChangePassword',
+    component: _views_lms_ChangePassword__WEBPACK_IMPORTED_MODULE_8__["default"],
+    meta: {
+      permission_name: []
+    }
   }],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["isLoggedIn"]()) {
+    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_9__["isLoggedIn"]()) {
       next('/login');
     } else {
       if (checkRoutePermission(to)) {
@@ -86128,7 +86686,7 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/authentication/Login.vue */ "./resources/js/views/authentication/Login.vue"));
   },
   beforeEnter: function beforeEnter(to, from, next) {
-    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["isLoggedIn"]()) {
+    if (!_services_auth_service__WEBPACK_IMPORTED_MODULE_9__["isLoggedIn"]()) {
       next();
     } else {
       next('/home');
@@ -86154,7 +86712,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*!***********************************************!*\
   !*** ./resources/js/services/auth_service.js ***!
   \***********************************************/
-/*! exports provided: login, getUser, isLoggedIn, logout */
+/*! exports provided: login, getUser, isLoggedIn, logout, changePassword */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86163,6 +86721,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUser", function() { return getUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isLoggedIn", function() { return isLoggedIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changePassword", function() { return changePassword; });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
@@ -86221,6 +86780,13 @@ function logout() {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
     method: 'get',
     url: '/auth/logout'
+  });
+}
+function changePassword(data) {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'post',
+    url: '/change-password',
+    data: data
   });
 }
 
@@ -86827,6 +87393,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_template_id_145da0e6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_template_id_145da0e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/lms/ChangePassword.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/views/lms/ChangePassword.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ChangePassword_vue_vue_type_template_id_3c81ee67___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChangePassword.vue?vue&type=template&id=3c81ee67& */ "./resources/js/views/lms/ChangePassword.vue?vue&type=template&id=3c81ee67&");
+/* harmony import */ var _ChangePassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangePassword.vue?vue&type=script&lang=js& */ "./resources/js/views/lms/ChangePassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ChangePassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ChangePassword_vue_vue_type_template_id_3c81ee67___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ChangePassword_vue_vue_type_template_id_3c81ee67___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/lms/ChangePassword.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/lms/ChangePassword.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/views/lms/ChangePassword.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangePassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ChangePassword.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ChangePassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangePassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/lms/ChangePassword.vue?vue&type=template&id=3c81ee67&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/views/lms/ChangePassword.vue?vue&type=template&id=3c81ee67& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangePassword_vue_vue_type_template_id_3c81ee67___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ChangePassword.vue?vue&type=template&id=3c81ee67& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ChangePassword.vue?vue&type=template&id=3c81ee67&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangePassword_vue_vue_type_template_id_3c81ee67___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangePassword_vue_vue_type_template_id_3c81ee67___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
