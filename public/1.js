@@ -385,12 +385,6 @@ var render = function() {
                 },
                 [
                   _c(
-                    "router-link",
-                    { staticClass: "small", attrs: { to: "/reset-password" } },
-                    [_vm._v("Forgot Password?")]
-                  ),
-                  _vm._v(" "),
-                  _c(
                     "button",
                     {
                       staticClass: "btn btn-primary",
@@ -399,24 +393,12 @@ var render = function() {
                     },
                     [_vm._v("Login")]
                   )
-                ],
-                1
+                ]
               )
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-footer text-center" }, [
-            _c(
-              "div",
-              { staticClass: "small" },
-              [
-                _c("router-link", { attrs: { to: "/register" } }, [
-                  _vm._v("Need an account? Sign up!")
-                ])
-              ],
-              1
-            )
-          ])
+          _vm._m(1)
         ])
       ])
     ])
@@ -431,6 +413,14 @@ var staticRenderFns = [
       _c("h3", { staticClass: "text-center font-weight-light my-4" }, [
         _vm._v("Login")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer text-center" }, [
+      _c("div", { staticClass: "small" })
     ])
   }
 ]

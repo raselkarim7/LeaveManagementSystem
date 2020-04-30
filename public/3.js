@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/authentication/Register.vue?vue&type=script&lang=js&":
@@ -306,3 +307,6 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
+=======
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{64:function(e,n,s){"use strict";s.r(n);var t={name:"Noaccess"},o=s(2),c=Object(o.a)(t,(function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("\n    You have no permission to access this route.\n")])}),[],!1,null,null,null);n.default=c.exports}}]);
+>>>>>>> master

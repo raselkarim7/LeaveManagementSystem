@@ -102,11 +102,11 @@ const routes = [
         name: 'Noaccess', 
         component: () => import('./views/fallback/Noaccess.vue')  
     },
-    {
-        path: '/register',
-        name: 'Register', 
-        component: () => import('./views/authentication/Register.vue') 
-    }, 
+    // {
+    //     path: '/register',
+    //     name: 'Register', 
+    //     component: () => import('./views/authentication/Register.vue') 
+    // }, 
     {
         path: '/login',
         name: 'Login', 
@@ -119,11 +119,11 @@ const routes = [
             }
         }
     }, 
-    {
-        path: '/reset-password',
-        name: 'ResetPassword', 
-        component: () => import('./views/authentication/ResetPassword.vue') 
-    }, 
+    // {
+    //     path: '/reset-password',
+    //     name: 'ResetPassword', 
+    //     component: () => import('./views/authentication/ResetPassword.vue') 
+    // }, 
     
 
 ]

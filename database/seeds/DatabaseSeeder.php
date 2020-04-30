@@ -32,8 +32,15 @@ class DatabaseSeeder extends Seeder
         ]);
         $user->roles()->attach(1);
 
-        foreach ($user->roles as $role) {
-            info($role->name);
-        }
+        $user2 = \App\User::create([
+            'name' => 'John Doe - HR',
+            'email' => 'hr@hr.com',
+            'password' => bcrypt('123456')
+        ]);
+        $user2->roles()->attach(2);
+
+//        foreach ($user->roles as $role) {
+//            info($role->name);
+//        }
     }
 }

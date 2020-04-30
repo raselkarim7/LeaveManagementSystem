@@ -363,13 +363,6 @@ var render = function() {
               attrs: { "aria-labelledby": "userDropdown" }
             },
             [
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _vm._v("Settings")
-              ]),
-              _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-                _vm._v("Activity Log")
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "dropdown-divider" }),
               _vm._v(" "),
               _c(
