@@ -56,5 +56,7 @@ Route::group([
     Route::post('add-leave', 'LeaveController@store');
     Route::get('applied-leaves', 'LeaveController@appliedLeaves');
     Route::get('pending-applications', 'LeaveController@pendingApplications');
+    Route::post('leave-approval', 'LeaveController@leaveApproval');
+
 
 });

@@ -28,3 +28,11 @@ export function pendingApplications() {
         url: 'pending-applications',
     })
 }
+
+export function leaveApproval(data) {
+    return http({
+        method: 'post', 
+        url: 'leave-approval',
+        data: data
+    })
+}

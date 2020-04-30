@@ -142,6 +142,39 @@ class LeaveController extends Controller
         return $pendingLeaves;
     }
 
+
+    public function leaveApproval(Request $request) {
+        $leave = Leave::find($request->id);
+        $user = User::where('id', $request->applied_by)->first();
+
+        if (empty($leave)) {
+            return response('Leave not found', 404);
+        } else if (empty($user)) {
+            return response('User not found', 404);
+        }
+
+        if ($request->action_type === 'approve') {
+            $leave->status = self::APPROVED;
+        } else if($request->action_type === 'reject') {
+            $leave->status = self::REJECTED;
+        }
+        $leave->approved_by = Auth::id();
+        $leave->save();
+
+        if ($request->action_type === 'approve') {
+            if($request->leave_types_id === 1) {
+                $user->paid_leave_taken = self::getDays($user->paid_leave_taken) + $request->no_of_days;
+            } else if ($request->leave_types_id === 2) {
+                $user->sick_leave_taken = self::getDays($user->sick_leave_taken) + $request->no_of_days;
+            }
+        }
+        $user->save();
+
+        return response()->json([
+            'message' => 'Leave Operation Successful!'
+        ], 200);
+    }
+
     /**
      * Display the specified resource.
      *
