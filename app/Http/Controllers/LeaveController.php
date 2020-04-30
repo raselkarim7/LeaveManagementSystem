@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use function PHPSTORM_META\type;
 
 class LeaveController extends Controller
 {
@@ -55,10 +56,12 @@ class LeaveController extends Controller
 
     public function store(Request $request)
     {
+
         $time = abs(strtotime($request->end_date) - strtotime($request->start_date));
         $diffdays = floor($time/(60*60*24)) + 1;
 
-        $user = Auth::user();
+        $user = User::where('id', Auth::id())->with('managers')->first();
+
 
         if ($request->leave_types_id === 1) {
             $pendingDays = self::getDays( $user->total_paid_leave) - self::getDays($user->paid_leave_taken);
@@ -115,9 +118,32 @@ class LeaveController extends Controller
         }
         $user->save();
 
+
+        $managers = $user->managers;
+        if($managers->isEmpty()) {
+           self::autoLeaveApproval($leave->id, Auth::id());
+        }
+
         return response()->json([
             'message' => 'Leave Applied Successfully!'
         ], 201);
+    }
+
+    public static function autoLeaveApproval($leave_id, $user_id) {
+
+        $leave = Leave::find($leave_id);
+        $user = User::where('id', $user_id)->first();
+
+        $leave->status = self::APPROVED;
+        $leave->save();
+
+        if($leave->leave_types_id === 1) {
+            $user->paid_leave_taken = self::getDays($user->paid_leave_taken) + $leave->no_of_days;
+        } else if ($leave->leave_types_id === 2) {
+            $user->sick_leave_taken = self::getDays($user->sick_leave_taken) + $leave->no_of_days;
+        }
+
+        $user->save();
     }
 
 
@@ -161,6 +187,7 @@ class LeaveController extends Controller
     }
 
 
+
     public function leaveApproval(Request $request) {
         $leave = Leave::find($request->id);
         $user = User::where('id', $request->applied_by)->first();
@@ -192,6 +219,9 @@ class LeaveController extends Controller
             'message' => 'Leave Operation Successful!'
         ], 200);
     }
+
+
+
 
     /**
      * Display the specified resource.

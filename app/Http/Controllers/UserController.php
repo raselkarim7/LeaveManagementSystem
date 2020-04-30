@@ -31,15 +31,16 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'manager_ids' => 'required',
+
             'role_ids' => 'required',
             'total_paid_leave' => 'required|numeric|min:1|max:20',
             'total_sick_leave' => 'required|numeric|min:1|max:20'
         ],
         [
             'role_ids.required' => 'You have to select Roles!',
-            'manager_ids.required' => 'You have to select assigned managers!'
+
         ]);
+
 
         $user = new User([
             'name' => $request->name,
@@ -67,14 +68,14 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
-            'manager_ids' => 'required',
+
             'role_ids' => 'required',
             'total_paid_leave' => 'required|numeric|min:1|max:20',
             'total_sick_leave' => 'required|numeric|min:1|max:20'
         ],
         [
             'role_ids.required' => 'You have to select Roles!',
-            'manager_ids.required' => 'You have to select assigned managers!'
+
         ]);
 
 

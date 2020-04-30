@@ -18,7 +18,7 @@
 
 
 
-                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <div class="sb-sidenav-menu-heading">USER Panel</div>
                         
 
                         <router-link class="nav-link" to="/home/apply-leave" v-if="hasPermission([])">

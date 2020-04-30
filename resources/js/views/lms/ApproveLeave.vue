@@ -41,14 +41,14 @@
                 <span
                   @click="handleAction(obj, 'approve')"
                   title="Approve"
-                  class="btn btn-success btn-sm mr-2"
+                  class="btn btn-success btn-sm m-1"
                 >
                   <i class="fa fa-check"></i>
                 </span>
                 <span
                   @click="handleAction(obj, 'reject')"
                   title="Reject"
-                  class="btn btn-danger btn-sm"
+                  class="btn btn-danger btn-sm m-1"
                 >
                   <i class="fa fa-times"></i>
                 </span>
