@@ -86673,13 +86673,12 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/fallback/Noaccess.vue */ "./resources/js/views/fallback/Noaccess.vue"));
   }
-}, {
-  path: '/register',
-  name: 'Register',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./views/authentication/Register.vue */ "./resources/js/views/authentication/Register.vue"));
-  }
-}, {
+}, // {
+//     path: '/register',
+//     name: 'Register', 
+//     component: () => import('./views/authentication/Register.vue') 
+// }, 
+{
   path: '/login',
   name: 'Login',
   component: function component() {
@@ -86692,13 +86691,12 @@ var routes = [{
       next('/home');
     }
   }
-}, {
-  path: '/reset-password',
-  name: 'ResetPassword',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/authentication/ResetPassword.vue */ "./resources/js/views/authentication/ResetPassword.vue"));
-  }
-}];
+} // {
+//     path: '/reset-password',
+//     name: 'ResetPassword', 
+//     component: () => import('./views/authentication/ResetPassword.vue') 
+// }, 
+];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: routes,

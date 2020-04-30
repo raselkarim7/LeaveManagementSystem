@@ -45,7 +45,7 @@
                 </div>
               </div>
               <div class="form-group d-flex align-items-left justify-content-between mt-4 mb-0">
-                <router-link class="small" to="/reset-password">Forgot Password?</router-link>
+                <!-- <router-link class="small" to="/reset-password">Forgot Password?</router-link> -->
                 <button
                   @click="handleLogin"
                   :disabled="submitingToServer"
@@ -56,7 +56,7 @@
           </div>
           <div class="card-footer text-center">
             <div class="small">
-              <router-link to="/register">Need an account? Sign up!</router-link>
+              <!-- <router-link to="/register">Need an account? Sign up!</router-link> -->
             </div>
           </div>
         </div>

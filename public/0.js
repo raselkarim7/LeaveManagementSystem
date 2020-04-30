@@ -294,17 +294,7 @@ var staticRenderFns = [
             staticClass:
               "d-flex align-items-center justify-content-between small"
           },
-          [
-            _c("div", { staticClass: "text-muted" }, [
-              _vm._v("Copyright © Your Website 2019")
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Privacy Policy")]),
-              _vm._v("\n                ·\n                "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Terms & Conditions")])
-            ])
-          ]
+          [_c("div")]
         )
       ])
     ])
@@ -555,7 +545,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _c("div", { staticClass: "sb-sidenav-footer" })
       ]
     )
   ])
@@ -593,15 +583,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "sb-sidenav-footer" }, [
-      _c("div", { staticClass: "small" }, [_vm._v("Logged in as:")]),
-      _vm._v("\n            Start Bootstrap\n        ")
-    ])
   }
 ]
 render._withStripped = true
