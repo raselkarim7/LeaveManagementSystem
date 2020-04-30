@@ -16,7 +16,7 @@ Follow the Steps**
 	DB_PASSWORD=
 
 ```
-### Step 1: Run following commands
+### Step 2: Run following commands
 ```
 composer install
 
