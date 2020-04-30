@@ -2468,11 +2468,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -68603,9 +68598,7 @@ var render = function() {
                       },
                       [_vm._v(_vm._s(appLeave.status))]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(4, true)
+                  ])
                 ])
               }),
               0
@@ -68872,19 +68865,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Leave Type")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-warning btn-sm" }, [
-        _vm._v("Edit--To Work")
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
       ])
     ])
   }

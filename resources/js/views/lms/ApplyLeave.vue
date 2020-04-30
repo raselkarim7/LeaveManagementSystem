@@ -75,9 +75,7 @@
               <th scope="col">Start Date</th>
               <th scope="col">End Date</th>
               <th scope="col">Leave Type</th>
-              <th scope="col">Status</th>
-              <th scope="col">Action</th>
-              
+              <th scope="col">Status</th>              
             </tr>
           </thead>
           <tbody>
@@ -89,9 +87,6 @@
               <td>
                 <span class="m-1" :class="leaveStatusClass(appLeave.status)">{{appLeave.status}}</span>                              
               </td>
-              <td> 
-                  <button class="btn btn-warning btn-sm">Edit--To Work</button>
-              </td>  
             </tr>
           </tbody>
         </table>
