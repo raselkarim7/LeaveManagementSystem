@@ -14,3 +14,10 @@ export function addLeave(data) {
         data: data
     })
 }
+
+export function appliedLeaves() {
+    return http({
+        method: 'get', 
+        url: 'applied-leaves',
+    })
+}

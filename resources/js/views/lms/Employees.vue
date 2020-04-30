@@ -222,6 +222,7 @@ export default {
     },
 
     createNewRecord: async function() {
+			this.submitingToServer = true;
 			try {
 
 				if (this.operationMode === 'edit') {

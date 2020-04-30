@@ -54,6 +54,6 @@ Route::group([
 
     Route::get('leave-types', 'LeaveController@leaveTypes');
     Route::post('add-leave', 'LeaveController@store');
-
+    Route::get('applied-leaves', 'LeaveController@appliedLeaves');
 
 });

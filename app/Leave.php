@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Leave extends Model
 {
-    public function leaveTypes() {
-        $this->belongsTo(LeaveType::class);
+    public function leaveType() {
+       return $this->belongsTo(LeaveType::class,'leave_types_id');
     }
 }

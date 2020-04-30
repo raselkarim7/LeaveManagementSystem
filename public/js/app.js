@@ -2312,6 +2312,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
+var _name$data$computed$m;
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -2425,13 +2427,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_name$data$computed$m = {
   name: "ApplyLeave",
   data: function data() {
     return {
+      submitingToServer: false,
       user: {},
       leave_types: [],
       leave: {
@@ -2440,7 +2489,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         start_date: "",
         end_date: ""
       },
-      errors: {}
+      errors: {},
+      applied_leaves: []
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])([])),
@@ -2451,120 +2501,202 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log("ApplyLeave ====== created: ");
     this.fetchLoggedInUser();
     this.fetchLeaveTypes();
-  },
-  methods: {
-    fetchLeaveTypes: function () {
-      var _fetchLeaveTypes = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["leaveTypes"]();
-
-              case 3:
-                response = _context.sent;
-                this.leave_types = response.data;
-                _context.next = 9;
-                break;
-
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](0);
-
-              case 9:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this, [[0, 7]]);
-      }));
-
-      function fetchLeaveTypes() {
-        return _fetchLeaveTypes.apply(this, arguments);
-      }
-
-      return fetchLeaveTypes;
-    }(),
-    fetchLoggedInUser: function () {
-      var _fetchLoggedInUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["getUser"]();
-
-              case 3:
-                response = _context2.sent;
-                this.user = response.data;
-                _context2.next = 9;
-                break;
-
-              case 7:
-                _context2.prev = 7;
-                _context2.t0 = _context2["catch"](0);
-
-              case 9:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[0, 7]]);
-      }));
-
-      function fetchLoggedInUser() {
-        return _fetchLoggedInUser.apply(this, arguments);
-      }
-
-      return fetchLoggedInUser;
-    }(),
-    hideTestModal: function hideTestModal() {
-      this.$refs.myTestModal.hide();
-    },
-    showTestModal: function showTestModal() {
-      this.$refs.myTestModal.show();
-    },
-    createNewRecord: function () {
-      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
-                return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["addLeave"](this.leave);
-
-              case 3:
-                response = _context3.sent;
-                _context3.next = 8;
-                break;
-
-              case 6:
-                _context3.prev = 6;
-                _context3.t0 = _context3["catch"](0);
-
-              case 8:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this, [[0, 6]]);
-      }));
-
-      function createNewRecord() {
-        return _createNewRecord.apply(this, arguments);
-      }
-
-      return createNewRecord;
-    }()
+    this.fetchAppliedLeaves();
   }
-});
+}, _defineProperty(_name$data$computed$m, "computed", {}), _defineProperty(_name$data$computed$m, "methods", {
+  leaveStatusClass: function leaveStatusClass(param) {
+    var design = '';
+
+    if (param === 'pending') {
+      design = 'primary';
+    } else if (param === 'approved') {
+      design = 'success';
+    } else if (param === 'approved') {
+      design = 'danger';
+    }
+
+    return "badge badge-pill badge-".concat(design);
+  },
+  fetchLeaveTypes: function () {
+    var _fetchLeaveTypes = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["leaveTypes"]();
+
+            case 3:
+              response = _context.sent;
+              this.leave_types = response.data;
+              _context.next = 9;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this, [[0, 7]]);
+    }));
+
+    function fetchLeaveTypes() {
+      return _fetchLeaveTypes.apply(this, arguments);
+    }
+
+    return fetchLeaveTypes;
+  }(),
+  fetchLoggedInUser: function () {
+    var _fetchLoggedInUser = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["getUser"]();
+
+            case 3:
+              response = _context2.sent;
+              this.user = response.data;
+              _context2.next = 9;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](0);
+
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this, [[0, 7]]);
+    }));
+
+    function fetchLoggedInUser() {
+      return _fetchLoggedInUser.apply(this, arguments);
+    }
+
+    return fetchLoggedInUser;
+  }(),
+  fetchAppliedLeaves: function () {
+    var _fetchAppliedLeaves = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["appliedLeaves"]();
+
+            case 3:
+              response = _context3.sent;
+              this.applied_leaves = response.data;
+              _context3.next = 9;
+              break;
+
+            case 7:
+              _context3.prev = 7;
+              _context3.t0 = _context3["catch"](0);
+
+            case 9:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this, [[0, 7]]);
+    }));
+
+    function fetchAppliedLeaves() {
+      return _fetchAppliedLeaves.apply(this, arguments);
+    }
+
+    return fetchAppliedLeaves;
+  }(),
+  hideFormModal: function hideFormModal() {
+    this.$refs.myFormModal.hide();
+  },
+  showFormModal: function showFormModal() {
+    this.leave = {
+      leave_types_id: "",
+      no_of_days: "",
+      start_date: "",
+      end_date: ""
+    }, this.$refs.myFormModal.show();
+  },
+  createNewRecord: function () {
+    var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              this.submitingToServer = true;
+              _context4.prev = 1;
+              _context4.next = 4;
+              return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["addLeave"](this.leave);
+
+            case 4:
+              response = _context4.sent;
+              this.errors = {};
+              this.submitingToServer = false;
+              this.flashMessage.success({
+                message: "Leave Applied successfully",
+                time: 2000
+              });
+              this.fetchLoggedInUser();
+              this.fetchAppliedLeaves();
+              this.hideFormModal();
+              _context4.next = 24;
+              break;
+
+            case 13:
+              _context4.prev = 13;
+              _context4.t0 = _context4["catch"](1);
+              this.submitingToServer = false;
+              _context4.t1 = _context4.t0.response.status;
+              _context4.next = _context4.t1 === 422 ? 19 : _context4.t1 === 500 ? 21 : 23;
+              break;
+
+            case 19:
+              this.errors = _context4.t0.response.data.errors; //console.log("errors =========== ", this.errors);
+
+              return _context4.abrupt("break", 24);
+
+            case 21:
+              this.flashMessage.error({
+                message: _context4.t0.response.data.message,
+                time: 2000
+              });
+              return _context4.abrupt("break", 24);
+
+            case 23:
+              return _context4.abrupt("break", 24);
+
+            case 24:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, this, [[1, 13]]);
+    }));
+
+    function createNewRecord() {
+      return _createNewRecord.apply(this, arguments);
+    }
+
+    return createNewRecord;
+  }()
+}), _name$data$computed$m);
 
 /***/ }),
 
@@ -2904,25 +3036,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.prev = 0;
+                this.submitingToServer = true;
+                _context4.prev = 1;
 
                 if (!(this.operationMode === 'edit')) {
-                  _context4.next = 6;
+                  _context4.next = 7;
                   break;
                 }
 
-                _context4.next = 4;
+                _context4.next = 5;
                 return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["editEmployee"](this.user);
 
-              case 4:
-                _context4.next = 8;
+              case 5:
+                _context4.next = 9;
                 break;
 
-              case 6:
-                _context4.next = 8;
+              case 7:
+                _context4.next = 9;
                 return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["addEmployee"](this.user);
 
-              case 8:
+              case 9:
                 this.submitingToServer = false;
                 this.errors = {};
                 this.fetchAllEmployees();
@@ -2931,39 +3064,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   time: 2000
                 });
                 this.hideFormModal();
-                _context4.next = 26;
+                _context4.next = 27;
                 break;
 
-              case 15:
-                _context4.prev = 15;
-                _context4.t0 = _context4["catch"](0);
+              case 16:
+                _context4.prev = 16;
+                _context4.t0 = _context4["catch"](1);
                 this.submitingToServer = false; // console.log("Login.vue Error ========= ", error, error.response);
 
                 _context4.t1 = _context4.t0.response.status;
-                _context4.next = _context4.t1 === 422 ? 21 : _context4.t1 === 500 ? 23 : 25;
+                _context4.next = _context4.t1 === 422 ? 22 : _context4.t1 === 500 ? 24 : 26;
                 break;
 
-              case 21:
+              case 22:
                 this.errors = _context4.t0.response.data.errors; //console.log("errors =========== ", this.errors);
 
-                return _context4.abrupt("break", 26);
+                return _context4.abrupt("break", 27);
 
-              case 23:
+              case 24:
                 this.flashMessage.error({
                   message: _context4.t0.response.data.message,
                   time: 2000
                 });
-                return _context4.abrupt("break", 26);
-
-              case 25:
-                return _context4.abrupt("break", 26);
+                return _context4.abrupt("break", 27);
 
               case 26:
+                return _context4.abrupt("break", 27);
+
+              case 27:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[0, 15]]);
+        }, _callee4, this, [[1, 16]]);
       }));
 
       function createNewRecord() {
@@ -64831,7 +64964,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-primary btn-sm ml-auto",
-              on: { click: _vm.showTestModal }
+              on: { click: _vm.showFormModal }
             },
             [
               _c("span", { staticClass: "fa fa-plus" }),
@@ -64887,10 +65020,49 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "card mb-4" }, [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("table", { staticClass: "table" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.applied_leaves, function(appLeave, index) {
+                return _c("tr", { key: index }, [
+                  _c("td", [_vm._v(_vm._s(appLeave.no_of_days))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(appLeave.start_date))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(appLeave.end_date))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(appLeave.leave_type.name))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "m-1",
+                        class: _vm.leaveStatusClass(appLeave.status)
+                      },
+                      [_vm._v(_vm._s(appLeave.status))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(4, true)
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
       _c(
         "b-modal",
         {
-          ref: "myTestModal",
+          ref: "myFormModal",
           attrs: { "hide-footer": "", title: "Add New Employee" }
         },
         [
@@ -64984,7 +65156,13 @@ var render = function() {
                       _vm.$set(_vm.leave, "no_of_days", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors.no_of_days
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.no_of_days[0]))
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", [
@@ -65013,9 +65191,11 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("p", [
-                  _vm._v("Value: '" + _vm._s(_vm.leave.start_date) + "'")
-                ])
+                _vm.errors.start_date
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.start_date[0]))
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", [
@@ -65044,7 +65224,11 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("p", [_vm._v("Value: '" + _vm._s(_vm.leave.end_date) + "'")])
+                _vm.errors.end_date
+                  ? _c("div", { staticClass: "d-block invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.end_date[0]))
+                    ])
+                  : _vm._e()
               ])
             ])
           ]),
@@ -65054,7 +65238,7 @@ var render = function() {
             {
               staticClass: "btn btn-default",
               attrs: { type: "button" },
-              on: { click: _vm.hideTestModal }
+              on: { click: _vm.hideFormModal }
             },
             [_vm._v("Cancel")]
           ),
@@ -65063,7 +65247,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-primary",
-              attrs: { type: "button" },
+              attrs: { type: "button", disabled: _vm.submitingToServer },
               on: { click: _vm.createNewRecord }
             },
             [_c("span", { staticClass: "fa fa-check" }), _vm._v(" Save\n    ")]
@@ -65105,6 +65289,47 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Total Sick Leave")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Sick Leave Taken")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header d-flex" }, [
+      _c("span", [
+        _c("i", { staticClass: "fas fa-table mr-1" }),
+        _vm._v("Leave Applications\n      ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No of days")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Start Date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("End Date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Leave Type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-warning btn-sm" }, [
+        _vm._v("Edit--To Work")
       ])
     ])
   }
@@ -82183,13 +82408,14 @@ service.interceptors.response.use(function (response) {
 /*!************************************************!*\
   !*** ./resources/js/services/leave_service.js ***!
   \************************************************/
-/*! exports provided: leaveTypes, addLeave */
+/*! exports provided: leaveTypes, addLeave, appliedLeaves */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "leaveTypes", function() { return leaveTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addLeave", function() { return addLeave; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appliedLeaves", function() { return appliedLeaves; });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 
 function leaveTypes() {
@@ -82203,6 +82429,12 @@ function addLeave(data) {
     method: 'post',
     url: 'add-leave',
     data: data
+  });
+}
+function appliedLeaves() {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'get',
+    url: 'applied-leaves'
   });
 }
 
