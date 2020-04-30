@@ -29,6 +29,13 @@ export function pendingApplications() {
     })
 }
 
+export function approvedOrRejectedApplications() {
+    return http({
+        method: 'get', 
+        url: 'approved-or-rejected-applications',
+    })
+}
+
 export function leaveApproval(data) {
     return http({
         method: 'post', 

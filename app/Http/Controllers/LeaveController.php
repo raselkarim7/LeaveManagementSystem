@@ -137,9 +137,27 @@ class LeaveController extends Controller
         $pendingLeaves = Leave::where('status', self::PENDING)
             ->whereIn('applied_by', $subordinateUserIds)
             ->with('leaveType')
+            ->with('appliedUser')
             ->get();
 
         return $pendingLeaves;
+    }
+
+    public function approvedOrRejectedApplications(Request $request) {
+        $manager_id = Auth::id();
+        $subordinateUserIds = DB::table('user_manager')
+            ->where('manager_id', $manager_id)
+            ->pluck('user_id');
+
+        $approvedOrRejectedLeaves = Leave::where('status', self::APPROVED)
+            ->orWhere('status', self::REJECTED)
+            ->whereIn('applied_by', $subordinateUserIds)
+            ->with('leaveType')
+            ->with('appliedUser')
+            ->with('approvedUser')
+            ->get();
+
+        return $approvedOrRejectedLeaves;
     }
 
 

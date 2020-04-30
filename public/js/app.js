@@ -2808,6 +2808,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2815,6 +2854,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       pending_applications: [],
+      approved_or_rejected_applications: [],
+      clickedUser: {},
       test: {
         name: "",
         image: ""
@@ -2823,6 +2864,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.fetchPendingApplications();
+    this.fetchApprovedOrRejectedApplications();
     _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["getUser"]().then(function (res) {
       console.log("Test.vue =========== ", res);
     })["catch"](function (err) {
@@ -2830,6 +2872,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     });
   },
   methods: {
+    showUser: function showUser(obj) {
+      this.clickedUser = obj;
+      this.showTestModal();
+    },
     fetchPendingApplications: function () {
       var _fetchPendingApplications = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -2866,6 +2912,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchPendingApplications;
     }(),
+    fetchApprovedOrRejectedApplications: function () {
+      var _fetchApprovedOrRejectedApplications = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["approvedOrRejectedApplications"]();
+
+              case 3:
+                response = _context2.sent;
+                this.approved_or_rejected_applications = response.data;
+                console.log("approved_or_rejected_applications Response === ", response.data, this.approved_or_rejected_applications);
+                _context2.next = 10;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 8]]);
+      }));
+
+      function fetchApprovedOrRejectedApplications() {
+        return _fetchApprovedOrRejectedApplications.apply(this, arguments);
+      }
+
+      return fetchApprovedOrRejectedApplications;
+    }(),
     leaveStatusClass: function leaveStatusClass(param) {
       var design = "";
 
@@ -2873,7 +2955,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         design = "secondary";
       } else if (param === "approved") {
         design = "success";
-      } else if (param === "approved") {
+      } else if (param === "rejected") {
         design = "danger";
       }
 
@@ -2892,40 +2974,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         confirmButtonText: "Yes, ".concat(action_type === "approve" ? 'Approve' : 'Reject', "!"),
         cancelButtonText: "No."
       }).then( /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(result) {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(result) {
           var response;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
             while (1) {
-              switch (_context2.prev = _context2.next) {
+              switch (_context3.prev = _context3.next) {
                 case 0:
                   if (!result.value) {
-                    _context2.next = 10;
+                    _context3.next = 10;
                     break;
                   }
 
-                  _context2.prev = 1;
-                  _context2.next = 4;
+                  _context3.prev = 1;
+                  _context3.next = 4;
                   return _services_leave_service__WEBPACK_IMPORTED_MODULE_1__["leaveApproval"](paramObj);
 
                 case 4:
-                  response = _context2.sent;
+                  response = _context3.sent;
 
                   _this.$swal.fire(action_type === "approve" ? "Approved!" : "Rejected!", "Leave has been ".concat(action_type === "approve" ? "Approved" : "Rejected", " Successfully."), "success"); // console.log('Leave Approval resp >> ', response)
 
 
-                  _context2.next = 10;
+                  _context3.next = 10;
                   break;
 
                 case 8:
-                  _context2.prev = 8;
-                  _context2.t0 = _context2["catch"](1);
+                  _context3.prev = 8;
+                  _context3.t0 = _context3["catch"](1);
 
                 case 10:
                 case "end":
-                  return _context2.stop();
+                  return _context3.stop();
               }
             }
-          }, _callee2, null, [[1, 8]]);
+          }, _callee3, null, [[1, 8]]);
         }));
 
         return function (_x) {
@@ -2940,16 +3022,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$refs.myTestModal.show();
     },
     createNewRecord: function () {
-      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      var _createNewRecord = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }));
 
       function createNewRecord() {
@@ -48849,6 +48931,25 @@ exports.push([module.i, ".swal2-popup.swal2-toast{flex-direction:row;align-items
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.handIcon:hover {\n    cursor: pointer;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/lib/css-base.js":
 /*!*************************************************!*\
   !*** ./node_modules/css-loader/lib/css-base.js ***!
@@ -64211,6 +64312,36 @@ try {
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ApproveLeave.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -68783,24 +68914,12 @@ var render = function() {
     "div",
     { staticClass: "container-fluid" },
     [
-      _c("h1", { staticClass: "mt-4" }, [_vm._v("Employees")]),
+      _c("h1", { staticClass: "mt-4" }, [
+        _vm._v("Subordinate Employees Applications ")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card mb-4" }, [
-        _c("div", { staticClass: "card-header d-flex" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-sm ml-auto",
-              on: { click: _vm.showTestModal }
-            },
-            [
-              _c("span", { staticClass: "fa fa-plus" }),
-              _vm._v(" Create Employee\n      ")
-            ]
-          )
-        ]),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("table", { staticClass: "table" }, [
@@ -68810,6 +68929,27 @@ var render = function() {
               "tbody",
               _vm._l(_vm.pending_applications, function(obj, index) {
                 return _c("tr", { key: index }, [
+                  _c("td", [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "handIcon text-primary",
+                        on: {
+                          click: function($event) {
+                            return _vm.showUser(obj.applied_user)
+                          }
+                        }
+                      },
+                      [
+                        _c("b", [
+                          _c("u", [
+                            _vm._v(" " + _vm._s(obj.applied_user.name) + " ")
+                          ])
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(obj.no_of_days))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(obj.start_date))]),
@@ -68866,65 +69006,151 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "card mb-4" }, [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("table", { staticClass: "table" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.approved_or_rejected_applications, function(
+                obj,
+                index
+              ) {
+                return _c("tr", { key: index }, [
+                  _c("td", [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "handIcon text-primary",
+                        on: {
+                          click: function($event) {
+                            return _vm.showUser(obj.applied_user)
+                          }
+                        }
+                      },
+                      [
+                        _c("b", [
+                          _c("u", [_vm._v(_vm._s(obj.applied_user.name))])
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(obj.no_of_days))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(obj.start_date))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(obj.end_date))]),
+                  _vm._v(" "),
+                  _c("td", [_c("b", [_vm._v(_vm._s(obj.leave_type.name))])]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "handIcon text-primary",
+                        on: {
+                          click: function($event) {
+                            return _vm.showUser(obj.approved_user)
+                          }
+                        }
+                      },
+                      [
+                        _c("b", [
+                          _c("u", [_vm._v(_vm._s(obj.approved_user.name))])
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "m-1",
+                        class: _vm.leaveStatusClass(obj.status)
+                      },
+                      [_vm._v(_vm._s(obj.status))]
+                    )
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
       _c(
         "b-modal",
         {
           ref: "myTestModal",
-          attrs: { "hide-footer": "", title: "Add New Employee" }
+          attrs: { "hide-footer": "", title: "Employee Data" }
         },
         [
           _c("div", { staticClass: "d-block" }, [
-            _c("form", [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+            _c("div", [
+              _c("b", [_vm._v("Name:")]),
+              _vm._v(" " + _vm._s(_vm.clickedUser.name) + " ")
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("b", [_vm._v("Email:")]),
+              _vm._v(" " + _vm._s(_vm.clickedUser.email) + " ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c("b", [_vm._v("Roles:")]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.test.name,
-                      expression: "test.name"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "name",
-                    placeholder: "Enter name here"
-                  },
-                  domProps: { value: _vm.test.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.test, "name", $event.target.value)
-                    }
-                  }
+                _vm._l(_vm.clickedUser.roles, function(role, idx) {
+                  return _c(
+                    "span",
+                    { key: idx, staticClass: "m-1 badge badge-primary" },
+                    [_vm._v(_vm._s(role.label) + " ")]
+                  )
                 })
-              ])
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", [
+              _c("b", [_vm._v("Total Paid Leave:")]),
+              _vm._v(" " + _vm._s(_vm.clickedUser.total_paid_leave) + " ")
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("b", [_vm._v("Paid Leave Taken:")]),
+              _vm._v(" " + _vm._s(_vm.clickedUser.paid_leave_taken) + " ")
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", [
+              _c("b", [_vm._v("Total Sick Leave:")]),
+              _vm._v(" " + _vm._s(_vm.clickedUser.total_sick_leave) + " ")
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("b", [_vm._v("Sick Leave Taken:")]),
+              _vm._v(" " + _vm._s(_vm.clickedUser.sick_leave_taken) + " ")
             ])
           ]),
           _vm._v(" "),
           _c(
             "button",
             {
-              staticClass: "btn btn-default",
+              staticClass: "mt-2 btn btn-primary",
               attrs: { type: "button" },
               on: { click: _vm.hideTestModal }
             },
-            [_vm._v("Cancel")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "button" },
-              on: { click: _vm.createNewRecord }
-            },
-            [_c("span", { staticClass: "fa fa-check" }), _vm._v(" Save\n    ")]
+            [_vm._v("\n      Cancel\n    ")]
           )
         ]
       )
@@ -68937,9 +69163,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("i", { staticClass: "fas fa-table mr-1" }),
-      _vm._v("All Employees\n      ")
+    return _c("div", { staticClass: "card-header d-flex" }, [
+      _c("span", [
+        _c("i", { staticClass: "fas fa-table mr-1" }),
+        _vm._v("Pending Applications\n      ")
+      ])
     ])
   },
   function() {
@@ -68948,6 +69176,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Applied By")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("No of days")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Start Date")]),
@@ -68959,6 +69189,39 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header d-flex" }, [
+      _c("span", [
+        _c("i", { staticClass: "fas fa-table mr-1" }),
+        _vm._v("Approved / Rejected Applications\n      ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Applied By")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No of days")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Start Date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("End Date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Leave Type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action By")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
       ])
     ])
   }
@@ -86103,7 +86366,7 @@ service.interceptors.response.use(function (response) {
 /*!************************************************!*\
   !*** ./resources/js/services/leave_service.js ***!
   \************************************************/
-/*! exports provided: leaveTypes, addLeave, appliedLeaves, pendingApplications, leaveApproval */
+/*! exports provided: leaveTypes, addLeave, appliedLeaves, pendingApplications, approvedOrRejectedApplications, leaveApproval */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86112,6 +86375,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addLeave", function() { return addLeave; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appliedLeaves", function() { return appliedLeaves; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pendingApplications", function() { return pendingApplications; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "approvedOrRejectedApplications", function() { return approvedOrRejectedApplications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "leaveApproval", function() { return leaveApproval; });
 /* harmony import */ var _http_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http_service */ "./resources/js/services/http_service.js");
 
@@ -86138,6 +86402,12 @@ function pendingApplications() {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
     method: 'get',
     url: 'pending-applications'
+  });
+}
+function approvedOrRejectedApplications() {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'get',
+    url: 'approved-or-rejected-applications'
   });
 }
 function leaveApproval(data) {
@@ -86505,7 +86775,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ApproveLeave_vue_vue_type_template_id_145da0e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ApproveLeave.vue?vue&type=template&id=145da0e6& */ "./resources/js/views/lms/ApproveLeave.vue?vue&type=template&id=145da0e6&");
 /* harmony import */ var _ApproveLeave_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ApproveLeave.vue?vue&type=script&lang=js& */ "./resources/js/views/lms/ApproveLeave.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _ApproveLeave_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ApproveLeave.vue?vue&type=style&index=0&lang=css& */ "./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -86513,7 +86785,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ApproveLeave_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ApproveLeave_vue_vue_type_template_id_145da0e6___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ApproveLeave_vue_vue_type_template_id_145da0e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -86542,6 +86814,22 @@ component.options.__file = "resources/js/views/lms/ApproveLeave.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ApproveLeave.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ApproveLeave.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ApproveLeave.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/lms/ApproveLeave.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ApproveLeave_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
