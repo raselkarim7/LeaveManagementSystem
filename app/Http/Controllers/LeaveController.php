@@ -99,6 +99,9 @@ class LeaveController extends Controller
             'no_of_days.*' => "No of days must be ".$diffdays.", based on Start & End Date"
         ]);
 
+
+
+
         $leave = new Leave();
         $leave->no_of_days = $request->no_of_days;
         $leave->start_date = $request->start_date;
