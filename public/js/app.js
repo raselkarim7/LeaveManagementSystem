@@ -68966,7 +68966,7 @@ var render = function() {
         "b-modal",
         {
           ref: "myFormModal",
-          attrs: { "hide-footer": "", title: "Add New Employee" }
+          attrs: { "hide-footer": "", title: "Apply for a leave" }
         },
         [
           _c("div", { staticClass: "d-block" }, [
