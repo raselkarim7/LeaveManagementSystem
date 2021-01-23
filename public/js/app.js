@@ -69396,7 +69396,13 @@ var render = function() {
                       },
                       [
                         _c("b", [
-                          _c("u", [_vm._v(_vm._s(obj.approved_user.name))])
+                          _c("u", [
+                            _vm._v(
+                              _vm._s(
+                                obj.approved_user && obj.approved_user.name
+                              )
+                            )
+                          ])
                         ])
                       ]
                     )

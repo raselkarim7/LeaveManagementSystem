@@ -100,9 +100,6 @@ class LeaveController extends Controller
             'no_of_days.*' => "No of days must be ".$diffdays.", based on Start & End Date"
         ]);
 
-
-
-
         $leave = new Leave();
         $leave->no_of_days = $request->no_of_days;
         $leave->start_date = $request->start_date;
@@ -124,32 +121,16 @@ class LeaveController extends Controller
 
 
         $managers = $user->managers;
+        
+        // auto approveAuth::id()
         if($managers->isEmpty()) {
-           self::autoLeaveApproval($leave->id, Auth::id());
+           $leave->approve();
         }
 
         return response()->json([
             'message' => 'Leave Applied Successfully!'
         ], 201);
     }
-
-    public static function autoLeaveApproval($leave_id, $user_id) {
-
-        $leave = Leave::find($leave_id);
-        $user = User::where('id', $user_id)->first();
-
-        $leave->status = self::APPROVED;
-        $leave->save();
-
-        if($leave->leave_types_id === 1) {
-            $user->paid_leave_taken = self::getDays($user->paid_leave_taken) + $leave->no_of_days;
-        } else if ($leave->leave_types_id === 2) {
-            $user->sick_leave_taken = self::getDays($user->sick_leave_taken) + $leave->no_of_days;
-        }
-
-        $user->save();
-    }
-
 
     public function appliedLeaves(Request $request) {
         return Leave::where('applied_by', Auth::id())->with('leaveType')->get();
@@ -191,7 +172,6 @@ class LeaveController extends Controller
     }
 
 
-
     public function leaveApproval(Request $request) {
         $leave = Leave::find($request->id);
         $user = User::where('id', $request->applied_by)->first();
@@ -214,23 +194,9 @@ class LeaveController extends Controller
         }
 
         if ($request->action_type === 'approve') {
-            $leave->status = self::APPROVED;
+            $leave->approve(Auth::id());
         } else if($request->action_type === self::REJECT) {
-            $leave->status = self::REJECTED;
-        }
-        $leave->approved_by = Auth::id();
-        $leave->save();
-
-        // if the operation is Reject, adjust the corresponding leave_taken number
-        // use no_of_days from the leave object, as user can pass wrong data 
-        if ($request->action_type === self::REJECT) {
-            if($request->leave_types_id === Leave::PAID_LEAVE_ID) {
-                $user->paid_leave_taken = self::getDays($user->paid_leave_taken) - $leave->no_of_days;
-            } else if ($request->leave_types_id === Leave::SICK_LEAVE_ID) {
-                $user->sick_leave_taken = self::getDays($user->sick_leave_taken) - $leave->no_of_days;
-            }
-
-            $user->save();
+            $leave->reject(Auth::id());
         }
 
         return response()->json([
