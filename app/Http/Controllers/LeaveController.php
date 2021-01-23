@@ -201,6 +201,11 @@ class LeaveController extends Controller
             return response('User not found', 404);
         }
 
+        // ensure this leave is not processed yet
+        if ($leave->status !== self::PENDING) {
+            return response(['message' => 'The leave has already been processed'], 404);
+        }
+
         if ($request->action_type === 'approve') {
             $leave->status = self::APPROVED;
         } else if($request->action_type === 'reject') {
