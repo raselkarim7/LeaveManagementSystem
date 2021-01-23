@@ -202,6 +202,12 @@ class LeaveController extends Controller
             return response('User not found', 404);
         }
 
+        // ensure current user is the manager of the applicant
+        $manager = $user->managers()->where('id', '=',  Auth::id())->first();
+        if (empty($manager)) {
+            return response(['message' => 'You do not have the correct permissiong'], 404);
+        }
+
         // ensure this leave is not processed yet
         if ($leave->status !== self::PENDING) {
             return response(['message' => 'The leave has already been processed'], 404);
