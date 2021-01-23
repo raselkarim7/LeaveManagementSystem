@@ -208,7 +208,10 @@ export default {
                     action_type === "approve" ? "Approved!" : "Rejected!",
                     `Leave has been ${ action_type === "approve" ? "Approved" : "Rejected" } Successfully.`,
                     "success"
-                );
+                ).then(() => {
+                  this.fetchApprovedOrRejectedApplications();
+                  this.fetchPendingApplications();
+                });
                 // console.log('Leave Approval resp >> ', response)
               } catch (error) {
                   

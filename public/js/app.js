@@ -3172,7 +3172,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 case 4:
                   response = _context3.sent;
 
-                  _this.$swal.fire(action_type === "approve" ? "Approved!" : "Rejected!", "Leave has been ".concat(action_type === "approve" ? "Approved" : "Rejected", " Successfully."), "success"); // console.log('Leave Approval resp >> ', response)
+                  _this.$swal.fire(action_type === "approve" ? "Approved!" : "Rejected!", "Leave has been ".concat(action_type === "approve" ? "Approved" : "Rejected", " Successfully."), "success").then(function () {
+                    _this.fetchApprovedOrRejectedApplications();
+
+                    _this.fetchPendingApplications();
+                  }); // console.log('Leave Approval resp >> ', response)
 
 
                   _context3.next = 10;
