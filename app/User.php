@@ -38,6 +38,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /*
+    * associations
+    */ 
     public function roles() {
         return $this->belongsToMany(Role::class, 'user_role');
     }

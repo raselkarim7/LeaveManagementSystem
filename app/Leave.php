@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Leave extends Model
 {
-    // constant
+    /*
+    * constans
+    */
     const PAID_LEAVE_ID = 1;
     const SICK_LEAVE_ID = 2;
     const PENDING = 'pending';
     const APPROVED = 'approved';
     const REJECTED = 'rejected';
     
+    /*
+    * associations
+    */ 
     public function leaveType() {
        return $this->belongsTo(LeaveType::class,'leave_types_id');
     }
@@ -62,7 +67,3 @@ class Leave extends Model
         $this->save();
     }
 }
-
-    
-
-    
