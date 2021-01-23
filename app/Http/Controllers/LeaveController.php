@@ -21,6 +21,7 @@ class LeaveController extends Controller
     private const PENDING = 'pending';
     private const APPROVED = 'approved';
     private const REJECTED = 'rejected';
+    private const REJECT = 'reject';
 
     public function leaveTypes() {
         return LeaveType::all();
@@ -208,20 +209,23 @@ class LeaveController extends Controller
 
         if ($request->action_type === 'approve') {
             $leave->status = self::APPROVED;
-        } else if($request->action_type === 'reject') {
+        } else if($request->action_type === self::REJECT) {
             $leave->status = self::REJECTED;
         }
         $leave->approved_by = Auth::id();
         $leave->save();
 
-        if ($request->action_type === 'approve') {
-            if($request->leave_types_id === 1) {
-                $user->paid_leave_taken = self::getDays($user->paid_leave_taken) + $request->no_of_days;
-            } else if ($request->leave_types_id === 2) {
-                $user->sick_leave_taken = self::getDays($user->sick_leave_taken) + $request->no_of_days;
+        // if the operation is Reject, adjust the corresponding leave_taken number
+        // use no_of_days from the leave object, as user can pass wrong data 
+        if ($request->action_type === self::REJECT) {
+            if($request->leave_types_id === Leave::PAID_LEAVE_ID) {
+                $user->paid_leave_taken = self::getDays($user->paid_leave_taken) - $leave->no_of_days;
+            } else if ($request->leave_types_id === Leave::SICK_LEAVE_ID) {
+                $user->sick_leave_taken = self::getDays($user->sick_leave_taken) - $leave->no_of_days;
             }
+
+            $user->save();
         }
-        $user->save();
 
         return response()->json([
             'message' => 'Leave Operation Successful!'
