@@ -27,10 +27,5 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
-
-        // // check the hr role
-        // Gate::define('ensureHr', function (User $user) {
-        //     return $user->roles()->first()->name === 'hr';
-        // });
     }
 }

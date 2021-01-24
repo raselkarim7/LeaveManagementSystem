@@ -86992,7 +86992,7 @@ function leaveTypes() {
 function addLeave(data) {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
     method: 'post',
-    url: 'add-leave',
+    url: 'leaves',
     data: data
   });
 }

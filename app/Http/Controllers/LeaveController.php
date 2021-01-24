@@ -32,15 +32,15 @@ class LeaveController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -55,7 +55,7 @@ class LeaveController extends Controller
         return $param;
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
 
         $time = abs(strtotime($request->end_date) - strtotime($request->start_date));
@@ -189,7 +189,7 @@ class LeaveController extends Controller
         }
 
         // ensure this leave is not processed yet
-        if ($leave->status !== self::PENDING) {
+        if ($leave->isProcessed()) {
             return response(['message' => 'The leave has already been processed'], 404);
         }
 

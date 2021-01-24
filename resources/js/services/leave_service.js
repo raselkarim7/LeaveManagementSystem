@@ -10,7 +10,7 @@ export function leaveTypes() {
 export function addLeave(data) {
     return http({
         method: 'post', 
-        url: 'add-leave', 
+        url: 'leaves', 
         data: data
     })
 }

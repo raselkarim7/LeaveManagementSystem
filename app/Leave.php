@@ -66,4 +66,12 @@ class Leave extends Model
         $this->status = $this::APPROVED;
         $this->save();
     }
+
+    public function isPending() {
+        return $this->status !== $this::PENDING;
+    }
+
+    public function isProcessed() {
+        return !$this->isPending();
+    }
 }
