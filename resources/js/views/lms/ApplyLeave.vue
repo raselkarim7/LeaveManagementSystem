@@ -223,6 +223,7 @@ export default {
             start_date: "",
             end_date: ""
         },
+        this.errors = {},
         this.$refs.myFormModal.show();
     },
 
