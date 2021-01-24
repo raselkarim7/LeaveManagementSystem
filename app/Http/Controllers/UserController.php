@@ -6,10 +6,16 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 
 class UserController extends Controller
 {
+
+    // user count for non hr/admin user 
+    public function getEmployeesCount() {
+        return response(["length" => User::count()], 200);
+    }
 
     public function getEmployees() {
         return User::has('roles', '==', 0)

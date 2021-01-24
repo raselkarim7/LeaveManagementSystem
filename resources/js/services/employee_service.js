@@ -14,6 +14,13 @@ export function getEmployees() {
     })
 }
 
+export function getEmployeesLength() {
+    return http({
+        method: 'get', 
+        url: 'employees-count', 
+    })
+}
+
 export function getHRmanagers() {
     return http({
         method: 'get', 

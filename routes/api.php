@@ -45,22 +45,28 @@ Route::group([
 Route::group([
     'middleware' => 'auth:api'
 ], function() {
-    Route::get('roles', 'RoleController@index');
-    Route::get('employees', 'UserController@getEmployees');
-    Route::get('hrmanagers', 'UserController@getHRmanagers');
-    Route::post('employee', 'UserController@addEmployee');
+    
+    Route::get('employees-count', 'UserController@getEmployeesCount');
     Route::put('employee', 'UserController@editEmployee');
-
 
     Route::get('leave-types', 'LeaveController@leaveTypes');
     Route::post('add-leave', 'LeaveController@store');
     Route::get('applied-leaves', 'LeaveController@appliedLeaves');
     Route::get('pending-applications', 'LeaveController@pendingApplications');
     Route::get('approved-or-rejected-applications', 'LeaveController@approvedOrRejectedApplications');
-    Route::post('leave-approval', 'LeaveController@leaveApproval');
+    
 
     Route::post('change-password', 'AuthController@changePassword');
 
-
+    // authorization for hr rolw
+    Route::group([
+        'middleware' => 'hr'
+    ], function () {
+        Route::get('employees', 'UserController@getEmployees');
+        Route::get('roles', 'RoleController@index');
+        Route::get('hrmanagers', 'UserController@getHRmanagers');
+        Route::post('employee', 'UserController@addEmployee');
+        Route::post('leave-approval', 'LeaveController@leaveApproval');
+    });
 
 });

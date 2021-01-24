@@ -55,4 +55,18 @@ class User extends Authenticatable
             ->select(['id','name','email']);
     }
 
+    /*
+    * instance methods
+    */ 
+    public function isHr() {
+        return in_array('hr', $this->roles()->pluck('name')->all());
+    }
+
+    public function isAdmin() {
+        return in_array('admin', $this->roles()->pluck('name')->all());
+    }
+
+    public function isAdminOrHr() {
+        return $this->isAdmin() || $this->isHr();
+    }
 }

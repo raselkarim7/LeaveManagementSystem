@@ -2178,9 +2178,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   created: function created() {
-    this.fetchEmployeees();
-    this.fetchRoles();
-    this.fetchHRmanagers();
+    // fetch admin/manager only data
+    if (this.hasPermission(['hr', 'admin'])) {
+      console.log("load the remaining data");
+      this.fetchEmployeees();
+      this.fetchRoles();
+      this.fetchHRmanagers();
+    } else {
+      this.fetchEmployeeesLength();
+    }
+
     this.getLoginUserInfo();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['hasPermission'])),
@@ -2220,8 +2227,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return fetchEmployeees;
     }(),
-    fetchRoles: function () {
-      var _fetchRoles = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    fetchEmployeeesLength: function () {
+      var _fetchEmployeeesLength = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2229,11 +2236,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getRoles"]();
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getEmployeesLength"]();
 
               case 3:
                 response = _context2.sent;
-                this.roles = response.data;
+                this.total_employeees = response.data.length;
                 _context2.next = 9;
                 break;
 
@@ -2249,14 +2256,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee2, this, [[0, 7]]);
       }));
 
-      function fetchRoles() {
-        return _fetchRoles.apply(this, arguments);
+      function fetchEmployeeesLength() {
+        return _fetchEmployeeesLength.apply(this, arguments);
       }
 
-      return fetchRoles;
+      return fetchEmployeeesLength;
     }(),
-    fetchHRmanagers: function () {
-      var _fetchHRmanagers = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    fetchRoles: function () {
+      var _fetchRoles = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
@@ -2264,11 +2271,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getHRmanagers"]();
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getRoles"]();
 
               case 3:
                 response = _context3.sent;
-                this.hr_managers = response.data;
+                this.roles = response.data;
                 _context3.next = 9;
                 break;
 
@@ -2284,14 +2291,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee3, this, [[0, 7]]);
       }));
 
-      function fetchHRmanagers() {
-        return _fetchHRmanagers.apply(this, arguments);
+      function fetchRoles() {
+        return _fetchRoles.apply(this, arguments);
       }
 
-      return fetchHRmanagers;
+      return fetchRoles;
     }(),
-    getLoginUserInfo: function () {
-      var _getLoginUserInfo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+    fetchHRmanagers: function () {
+      var _fetchHRmanagers = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
@@ -2299,11 +2306,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["getUser"]();
+                return _services_employee_service__WEBPACK_IMPORTED_MODULE_1__["getHRmanagers"]();
 
               case 3:
                 response = _context4.sent;
-                this.user = response.data;
+                this.hr_managers = response.data;
                 _context4.next = 9;
                 break;
 
@@ -2317,6 +2324,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
           }
         }, _callee4, this, [[0, 7]]);
+      }));
+
+      function fetchHRmanagers() {
+        return _fetchHRmanagers.apply(this, arguments);
+      }
+
+      return fetchHRmanagers;
+    }(),
+    getLoginUserInfo: function () {
+      var _getLoginUserInfo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["getUser"]();
+
+              case 3:
+                response = _context5.sent;
+                this.user = response.data;
+                _context5.next = 9;
+                break;
+
+              case 7:
+                _context5.prev = 7;
+                _context5.t0 = _context5["catch"](0);
+
+              case 9:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this, [[0, 7]]);
       }));
 
       function getLoginUserInfo() {
@@ -86804,13 +86846,14 @@ function changePassword(data) {
 /*!***************************************************!*\
   !*** ./resources/js/services/employee_service.js ***!
   \***************************************************/
-/*! exports provided: getRoles, getEmployees, getHRmanagers, addEmployee, editEmployee */
+/*! exports provided: getRoles, getEmployees, getEmployeesLength, getHRmanagers, addEmployee, editEmployee */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRoles", function() { return getRoles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEmployees", function() { return getEmployees; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEmployeesLength", function() { return getEmployeesLength; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHRmanagers", function() { return getHRmanagers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addEmployee", function() { return addEmployee; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editEmployee", function() { return editEmployee; });
@@ -86826,6 +86869,12 @@ function getEmployees() {
   return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
     method: 'get',
     url: 'employees'
+  });
+}
+function getEmployeesLength() {
+  return Object(_http_service__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    method: 'get',
+    url: 'employees-count'
   });
 }
 function getHRmanagers() {
