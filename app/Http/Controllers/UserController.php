@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Gate;
+use \App\Http\Requests\StoreUserRequest;
+use \App\Http\Requests\EditUserRequest;
 
 
 class UserController extends Controller
@@ -32,22 +34,7 @@ class UserController extends Controller
         })->with('roles')->with('managers')->get();
     }
 
-    public function addEmployee(Request $request) {
-
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-
-            'role_ids' => 'required',
-            'total_paid_leave' => 'required|numeric|min:1|max:20',
-            'total_sick_leave' => 'required|numeric|min:1|max:20'
-        ],
-        [
-            'role_ids.required' => 'You have to select Roles!',
-
-        ]);
-
-
+    public function addEmployee(StoreUserRequest $request) {
         $user = new User($request->all());
         $user->password = bcrypt('123456');
 
@@ -60,25 +47,11 @@ class UserController extends Controller
         ], 201);
     }
 
-    public function editEmployee(Request $request) {
+    public function editEmployee(EditUserRequest $request) {
         $user = User::find($request->id);
         if (empty($user)) {
             return response('User not found', 404);
         }
-
-        $request->validate([
-            'name' => 'required|string',
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
-
-            'role_ids' => 'required',
-            'total_paid_leave' => 'required|numeric|min:1|max:20',
-            'total_sick_leave' => 'required|numeric|min:1|max:20'
-        ],
-        [
-            'role_ids.required' => 'You have to select Roles!',
-
-        ]);
-
 
         $data = $request->all();
         $user->update($data);
