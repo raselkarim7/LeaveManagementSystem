@@ -15,6 +15,14 @@ class Leave extends Model
     const APPROVED = 'approved';
     const REJECTED = 'rejected';
     
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'no_of_days', 'start_date', 'end_date', 'leave_types_id'];
+
     /*
     * associations
     */ 
@@ -68,7 +76,7 @@ class Leave extends Model
     }
 
     public function isPending() {
-        return $this->status !== $this::PENDING;
+        return $this->status === $this::PENDING;
     }
 
     public function isProcessed() {

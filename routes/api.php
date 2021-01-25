@@ -50,7 +50,7 @@ Route::group([
     Route::put('employee', 'UserController@editEmployee');
 
     Route::get('leave-types', 'LeaveController@leaveTypes');
-    Route::post('leaves', 'LeaveController@create');
+    Route::post('leaves', 'LeaveController@store');
     Route::get('applied-leaves', 'LeaveController@appliedLeaves');
     Route::get('pending-applications', 'LeaveController@pendingApplications');
     Route::get('approved-or-rejected-applications', 'LeaveController@approvedOrRejectedApplications');

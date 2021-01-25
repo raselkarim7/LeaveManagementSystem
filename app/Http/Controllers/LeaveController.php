@@ -55,7 +55,7 @@ class LeaveController extends Controller
         return $param;
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
 
         $time = abs(strtotime($request->end_date) - strtotime($request->start_date));
@@ -100,16 +100,14 @@ class LeaveController extends Controller
             'no_of_days.*' => "No of days must be ".$diffdays.", based on Start & End Date"
         ]);
 
-        $leave = new Leave();
-        $leave->no_of_days = $request->no_of_days;
-        $leave->start_date = $request->start_date;
-        $leave->end_date = $request->end_date;
-        $leave->leave_types_id = $request->leave_types_id;
+        // use mass assignment feature
+        $leave = new Leave($request->all());
         $leave->applied_by = Auth::id();
         $leave->status = self::PENDING;
+        
         $leave->save();
 
-        $user = User::find(Auth::id());
+        $user = Auth::user();
         if ($request->leave_types_id === 1) {
             $alreadyTaken = self::getDays( $user->paid_leave_taken );
             $user->paid_leave_taken = $alreadyTaken + $leave->no_of_days;
@@ -120,9 +118,10 @@ class LeaveController extends Controller
         $user->save();
 
 
+        /*
+        * handle auto approval if there is no manager
+        */ 
         $managers = $user->managers;
-        
-        // auto approveAuth::id()
         if($managers->isEmpty()) {
            $leave->approve();
         }
