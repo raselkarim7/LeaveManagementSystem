@@ -150,7 +150,7 @@ class LeaveController extends Controller
 
         // ensure this leave is not processed yet
         if ($leave->isProcessed()) {
-            return response(['message' => 'The leave has already been processed'], 404);
+            return response(['message' => 'The leave has already been processed'], 422);
         }
 
         if ($request->action_type === 'approve') {

@@ -214,7 +214,10 @@ export default {
                 });
                 // console.log('Leave Approval resp >> ', response)
               } catch (error) {
-                  
+                  this.flashMessage.error({
+                    message: error.response.data.message,
+                    time: 3000
+                  });
               }
           }
         });
