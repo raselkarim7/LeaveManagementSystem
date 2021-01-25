@@ -48,13 +48,8 @@ class UserController extends Controller
         ]);
 
 
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt('123456'),
-            'total_paid_leave' => $request->total_paid_leave,
-            'total_sick_leave' => $request->total_sick_leave
-        ]);
+        $user = new User($request->all());
+        $user->password = bcrypt('123456');
 
         $user->save();
         $user->roles()->attach($request->role_ids);
@@ -85,11 +80,8 @@ class UserController extends Controller
         ]);
 
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->total_paid_leave = $request->total_paid_leave;
-        $user->total_sick_leave = $request->total_sick_leave;
-        $user->save();
+        $data = $request->all();
+        $user->update($data);
         $user->roles()->sync($request->role_ids);
         $user->managers()->sync($request->manager_ids);
         return response()->json([
