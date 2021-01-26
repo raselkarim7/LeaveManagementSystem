@@ -7,7 +7,7 @@
         </button>
     </div>
 
-    <b-modal ref="myTestModal" hide-footer title="Add New Employee">
+    <b-modal ref="myTestModal" hide-footer title="Change the Password">
       <div class="d-block">
         <form>
           <div class="form-group">
@@ -82,7 +82,8 @@ export default {
         old_password: "",
         password: "", 
         password_confirmation: "" 
-			}
+      }
+      this.errors = {};
       this.$refs.myTestModal.show();
     },
 

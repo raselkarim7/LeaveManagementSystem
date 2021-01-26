@@ -88,7 +88,7 @@
               <td>{{obj.start_date}}</td>
               <td>{{obj.end_date}}</td>
               <td> <b>{{obj.leave_type.name}}</b> </td>
-              <td> <div class="handIcon text-primary" @click="showUser(obj.approved_user)">  <b> <u>{{obj.approved_user.name }}</u> </b> </div> </td>
+              <td> <div class="handIcon text-primary" @click="showUser(obj.approved_user)">  <b> <u>{{obj.approved_user && obj.approved_user.name }}</u> </b> </div> </td>
               <td>
                 <span class="m-1" :class="leaveStatusClass(obj.status)">{{obj.status}}</span>
               </td>
@@ -208,10 +208,16 @@ export default {
                     action_type === "approve" ? "Approved!" : "Rejected!",
                     `Leave has been ${ action_type === "approve" ? "Approved" : "Rejected" } Successfully.`,
                     "success"
-                );
+                ).then(() => {
+                  this.fetchApprovedOrRejectedApplications();
+                  this.fetchPendingApplications();
+                });
                 // console.log('Leave Approval resp >> ', response)
               } catch (error) {
-                  
+                  this.flashMessage.error({
+                    message: error.response.data.message,
+                    time: 3000
+                  });
               }
           }
         });

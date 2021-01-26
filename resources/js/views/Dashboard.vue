@@ -88,9 +88,16 @@ export default {
         }
     }, 
     created() {
-        this.fetchEmployeees()
-        this.fetchRoles()
-        this.fetchHRmanagers()
+        // fetch admin/manager only data
+        if (this.hasPermission(['hr', 'admin'])) {
+            console.log("load the remaining data")
+            this.fetchEmployeees();
+            this.fetchRoles();
+            this.fetchHRmanagers();
+        } else {
+            this.fetchEmployeeesLength();
+        }
+        
         this.getLoginUserInfo()
         
     },
@@ -103,6 +110,14 @@ export default {
         fetchEmployeees: async function() {
             try {
                 const response = await employeeService.getEmployees();
+                this.total_employeees = response.data.length; 
+            } catch (error) {
+                
+            }
+        },
+        fetchEmployeeesLength: async function() {
+            try {
+                const response = await employeeService.getEmployeesLength();
                 this.total_employeees = response.data.length; 
             } catch (error) {
                 

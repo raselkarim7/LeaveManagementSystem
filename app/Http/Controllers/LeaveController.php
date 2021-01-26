@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use function PHPSTORM_META\type;
+use \App\Http\Requests\StoreLeaveRequest;
 
 class LeaveController extends Controller
 {
@@ -21,22 +22,13 @@ class LeaveController extends Controller
     private const PENDING = 'pending';
     private const APPROVED = 'approved';
     private const REJECTED = 'rejected';
+    private const REJECT = 'reject';
 
     public function leaveTypes() {
         return LeaveType::all();
     }
 
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -54,64 +46,19 @@ class LeaveController extends Controller
         return $param;
     }
 
-    public function store(Request $request)
+    public function store(StoreLeaveRequest $request)
     {
 
-        $time = abs(strtotime($request->end_date) - strtotime($request->start_date));
-        $diffdays = floor($time/(60*60*24)) + 1;
-
         $user = User::where('id', Auth::id())->with('managers')->first();
-
-
-        if ($request->leave_types_id === 1) {
-            $pendingDays = self::getDays( $user->total_paid_leave) - self::getDays($user->paid_leave_taken);
-            $leaveType = 'Paid';
-        } else {
-            $pendingDays = self::getDays($user->total_sick_leave) - self::getDays($user->sick_leave_taken);
-            $leaveType = 'Sick';
-        }
-
-        if ($pendingDays === 0) {
-            $request->validate([
-                'no_of_days' => ["required", Rule::in($pendingDays)]
-            ],
-            [
-                'no_of_days.required' => 'No of days required.',
-                'no_of_days.*' => "No more $leaveType leave is remained, Select another Leave Type & Try."
-            ]);
-        }
-
-        $request->validate([
-           'no_of_days' => "numeric|between:1,$pendingDays"
-        ],
-        [
-            'no_of_days.*' => "No of days must be bewtween 1 and $pendingDays"
-        ]);
-
-        $request->validate([
-            'leave_types_id' => 'required',
-            'no_of_days' => Rule::in([$diffdays]),
-            'start_date' => 'required|date|after:today',
-            'end_date' => 'required|date|after_or_equal:start_date'
-        ],
-        [
-            'leave_types_id.required' => 'You have to select Leave Types!',
-            'no_of_days.*' => "No of days must be ".$diffdays.", based on Start & End Date"
-        ]);
-
-
-
-
-        $leave = new Leave();
-        $leave->no_of_days = $request->no_of_days;
-        $leave->start_date = $request->start_date;
-        $leave->end_date = $request->end_date;
-        $leave->leave_types_id = $request->leave_types_id;
+        
+        // use mass assignment feature
+        $leave = new Leave($request->all());
         $leave->applied_by = Auth::id();
         $leave->status = self::PENDING;
+        
         $leave->save();
 
-        $user = User::find(Auth::id());
+        $user = Auth::user();
         if ($request->leave_types_id === 1) {
             $alreadyTaken = self::getDays( $user->paid_leave_taken );
             $user->paid_leave_taken = $alreadyTaken + $leave->no_of_days;
@@ -122,33 +69,18 @@ class LeaveController extends Controller
         $user->save();
 
 
+        /*
+        * handle auto approval if there is no manager
+        */ 
         $managers = $user->managers;
         if($managers->isEmpty()) {
-           self::autoLeaveApproval($leave->id, Auth::id());
+           $leave->approve();
         }
 
         return response()->json([
             'message' => 'Leave Applied Successfully!'
         ], 201);
     }
-
-    public static function autoLeaveApproval($leave_id, $user_id) {
-
-        $leave = Leave::find($leave_id);
-        $user = User::where('id', $user_id)->first();
-
-        $leave->status = self::APPROVED;
-        $leave->save();
-
-        if($leave->leave_types_id === 1) {
-            $user->paid_leave_taken = self::getDays($user->paid_leave_taken) + $leave->no_of_days;
-        } else if ($leave->leave_types_id === 2) {
-            $user->sick_leave_taken = self::getDays($user->sick_leave_taken) + $leave->no_of_days;
-        }
-
-        $user->save();
-    }
-
 
     public function appliedLeaves(Request $request) {
         return Leave::where('applied_by', Auth::id())->with('leaveType')->get();
@@ -190,7 +122,6 @@ class LeaveController extends Controller
     }
 
 
-
     public function leaveApproval(Request $request) {
         $leave = Leave::find($request->id);
         $user = User::where('id', $request->applied_by)->first();
@@ -201,22 +132,22 @@ class LeaveController extends Controller
             return response('User not found', 404);
         }
 
-        if ($request->action_type === 'approve') {
-            $leave->status = self::APPROVED;
-        } else if($request->action_type === 'reject') {
-            $leave->status = self::REJECTED;
+        // ensure current user is the manager of the applicant
+        $manager = $user->managers()->where('id', '=',  Auth::id())->first();
+        if (empty($manager)) {
+            return response(['message' => 'You do not have the correct permissiong'], 404);
         }
-        $leave->approved_by = Auth::id();
-        $leave->save();
+
+        // ensure this leave is not processed yet
+        if ($leave->isProcessed()) {
+            return response(['message' => 'The leave has already been processed'], 422);
+        }
 
         if ($request->action_type === 'approve') {
-            if($request->leave_types_id === 1) {
-                $user->paid_leave_taken = self::getDays($user->paid_leave_taken) + $request->no_of_days;
-            } else if ($request->leave_types_id === 2) {
-                $user->sick_leave_taken = self::getDays($user->sick_leave_taken) + $request->no_of_days;
-            }
+            $leave->approve(Auth::id());
+        } else if($request->action_type === self::REJECT) {
+            $leave->reject(Auth::id());
         }
-        $user->save();
 
         return response()->json([
             'message' => 'Leave Operation Successful!'

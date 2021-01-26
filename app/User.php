@@ -38,6 +38,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /*
+    * associations
+    */ 
     public function roles() {
         return $this->belongsToMany(Role::class, 'user_role');
     }
@@ -52,4 +55,18 @@ class User extends Authenticatable
             ->select(['id','name','email']);
     }
 
+    /*
+    * instance methods
+    */ 
+    public function isHr() {
+        return in_array('hr', $this->roles()->pluck('name')->all());
+    }
+
+    public function isAdmin() {
+        return in_array('admin', $this->roles()->pluck('name')->all());
+    }
+
+    public function isAdminOrHr() {
+        return $this->isAdmin() || $this->isHr();
+    }
 }

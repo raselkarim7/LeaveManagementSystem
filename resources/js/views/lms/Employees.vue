@@ -173,7 +173,8 @@ export default {
 			const manager_ids = employee.managers.map(o => o.id)
 			const {id, name, email, total_paid_leave, total_sick_leave } = employee;
 			const obj =  {id, name, email, total_paid_leave, total_sick_leave, role_ids, manager_ids }
-			this.user = obj; 
+      this.user = obj;
+      this.errors = {};
 			this.showFormModal(); 
 			this.operationMode = 'edit'
 		}, 
@@ -213,7 +214,9 @@ export default {
 				manager_ids: [], 
         total_paid_leave: '', 
         total_sick_leave: '', 
-			}, 
+      }, 
+      this.operationMode = 'create';
+      this.errors = {};
 			this.showFormModal(); 
 		}, 
 

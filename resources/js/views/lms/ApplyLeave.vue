@@ -93,7 +93,7 @@
       </div>
     </div>
 
-    <b-modal ref="myFormModal" hide-footer title="Add New Employee">
+    <b-modal ref="myFormModal" hide-footer title="Apply for a leave">
       <div class="d-block">
         <form>
           <div class="form-group">
@@ -223,6 +223,7 @@ export default {
             start_date: "",
             end_date: ""
         },
+        this.errors = {},
         this.$refs.myFormModal.show();
     },
 

@@ -6,10 +6,18 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
+use \App\Http\Requests\StoreUserRequest;
+use \App\Http\Requests\EditUserRequest;
 
 
 class UserController extends Controller
 {
+
+    // user count for non hr/admin user 
+    public function getEmployeesCount() {
+        return response(["length" => User::count()], 200);
+    }
 
     public function getEmployees() {
         return User::has('roles', '==', 0)
@@ -26,29 +34,9 @@ class UserController extends Controller
         })->with('roles')->with('managers')->get();
     }
 
-    public function addEmployee(Request $request) {
-
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-
-            'role_ids' => 'required',
-            'total_paid_leave' => 'required|numeric|min:1|max:20',
-            'total_sick_leave' => 'required|numeric|min:1|max:20'
-        ],
-        [
-            'role_ids.required' => 'You have to select Roles!',
-
-        ]);
-
-
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt('123456'),
-            'total_paid_leave' => $request->total_paid_leave,
-            'total_sick_leave' => $request->total_sick_leave
-        ]);
+    public function addEmployee(StoreUserRequest $request) {
+        $user = new User($request->all());
+        $user->password = bcrypt('123456');
 
         $user->save();
         $user->roles()->attach($request->role_ids);
@@ -59,31 +47,14 @@ class UserController extends Controller
         ], 201);
     }
 
-    public function editEmployee(Request $request) {
+    public function editEmployee(EditUserRequest $request) {
         $user = User::find($request->id);
         if (empty($user)) {
             return response('User not found', 404);
         }
 
-        $request->validate([
-            'name' => 'required|string',
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
-
-            'role_ids' => 'required',
-            'total_paid_leave' => 'required|numeric|min:1|max:20',
-            'total_sick_leave' => 'required|numeric|min:1|max:20'
-        ],
-        [
-            'role_ids.required' => 'You have to select Roles!',
-
-        ]);
-
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->total_paid_leave = $request->total_paid_leave;
-        $user->total_sick_leave = $request->total_sick_leave;
-        $user->save();
+        $data = $request->all();
+        $user->update($data);
         $user->roles()->sync($request->role_ids);
         $user->managers()->sync($request->manager_ids);
         return response()->json([
